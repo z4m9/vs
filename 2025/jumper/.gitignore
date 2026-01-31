@@ -1,0 +1,5 @@
+*.docx
+jumper/images/*
+jumper/sounds/*
+**/sounds/
+.DS_Store

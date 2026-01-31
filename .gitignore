@@ -1,3 +1,4 @@
 *.docx
-vs/*/images/
-vs/*/sounds/
+vs/images/*
+vs/sounds/*
+**/sounds/

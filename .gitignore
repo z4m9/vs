@@ -1,4 +1,4 @@
 *.docx
-vs/images/*
-vs/sounds/*
+jumper/images/*
+jumper/sounds/*
 **/sounds/

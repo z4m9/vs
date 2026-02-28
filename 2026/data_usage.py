@@ -1,4 +1,8 @@
-# This program allows users to understand their data consumption and if they are close to reaching their limit.
+# data usage 
+# PF3
+# Sam M 22-Feb-2026
+# 
+# # This program allows users to understand their data consumption and if they are close to reaching their limit.
 
 #asks the user how much mobile data is included in their plan (in gigabytes)
 #asks the user how much data they have used so far (in gigabytes)

@@ -1,3 +1,8 @@
+# boolean data type 
+# PF4
+# Sam M 22-Feb-2026
+
+
 print()
 y = False
 print("1 ",y)

@@ -1,3 +1,8 @@
+# data types 
+# PF3
+# Sam M 22-Feb-2026
+
+
 # 1: assigns 7 + 2.2 = 9.2) to variable y
 print() # Empty line for readability
 y = 7 + 2.2

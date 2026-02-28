@@ -1,3 +1,10 @@
+# student assessment 
+# PF3
+# Sam M 16-Feb-2026
+
+
+
+
 def get_student_details():
     name1 = input("Enter your name (first & last): ")
     results = int(input("Enter your assessment results: "))

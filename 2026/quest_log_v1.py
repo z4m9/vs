@@ -3,7 +3,7 @@
 # Samuel Marriott 1/03/2026
 
 def show_menu():
-    print("Quests Log Menu")
+    print("\n Quests Log Menu")
     print("Here are your options:")
     print("1: Find the Lost Key")
     print("2: Unlock the Ancient Gate")
@@ -13,11 +13,18 @@ def show_menu():
     print("6: Quit")
 
 def add_quest(quests):
-    user = input("Enter a quest: ")
-    print(user)
+    quest = input("Enter your quest: ")
+    quests.append(quest)
+    print(f"Quest confirmed: {quest}")
+    print(quests)
+    print("Enjoy your time.")
 
 def list_quests(quests):
-    print("list_quests stub")
+    len(quests)
+    if quests == []:
+        print("No quests yet")
+    else:
+        print(f"Your quests: {quests}")
 
 def complete_quest(quests):
     print("complete_quest stub")
@@ -38,11 +45,18 @@ def main():
     # An empty list called quests
     quests = []
     while True:
-        show_menu()
+        user = input("Would you like to complete a quest of your own? ")
+        if user == "Yes":
+            add_quest(quests)
+        else:
+            list_check = input("Do you want to check your quest list? ")
+            if list_check == "Yes":
+                list_quests(quests)
+            else:
+                show_menu()
         option = input("Choose an option (1-6): ").strip()
         if option == "1":
             print("Your selected quest: Find the Lost Key")
-            add_quest(quests)
         elif option == "2":
             print("Your selected quest: Unlock the Ancient Gate")
             list_quests(quests)

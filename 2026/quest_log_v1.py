@@ -3,10 +3,18 @@
 # Samuel Marriott 1/03/2026
 
 def show_menu():
-    print("Show_menu stub called")
+    print("Quests Log Menu")
+    print("Here are your options:")
+    print("1: Find the Lost Key")
+    print("2: Unlock the Ancient Gate")
+    print("3: Deliver the Secret Message")
+    print("4: Complete the Obstance Course")
+    print("5: Defeat the Boss")
+    print("6: Quit")
 
 def add_quest(quests):
-    print("add_quest stub")
+    user = input("Enter a quest: ")
+    print(user)
 
 def list_quests(quests):
     print("list_quests stub")
@@ -17,29 +25,36 @@ def complete_quest(quests):
 def sort_quests_az(quests):
     print("sort_quests_az stub")
 
+def sort_quests_za(quests):
+    print("sort_quests_az stub")
+
 def quests():
     print("quests declared")
 
 def main():
-    # TODO: Create an empty list called quests
 
     print("🧭 Welcome to Quest Log Manager (v1)")
     print("Type a menu option number to choose an action.")
-    quests = ["Find the Lost Key", "Unlock the Ancient Gate", "Deliver the Secret Message"]
+    # An empty list called quests
+    quests = []
     while True:
         show_menu()
         option = input("Choose an option (1-6): ").strip()
-
         if option == "1":
+            print("Your selected quest: Find the Lost Key")
             add_quest(quests)
         elif option == "2":
+            print("Your selected quest: Unlock the Ancient Gate")
             list_quests(quests)
         elif option == "3":
+            print("Your selected quest: Deliver the Secret Message")
             complete_quest(quests)
         elif option == "4":
+            print("Your selected quest: Complete the Obstance Course")
             sort_quests_az(quests)
         elif option == "5":
-            sort_quests_az(quests)
+            print("Your selected quest: Defeat the Boss")
+            sort_quests_za(quests)
         elif option == "6":
             print("👋 Goodbye!")
             break

@@ -17,11 +17,16 @@ def add_quest(quests):
     #print("add_quest stub") # Temporary
     quest = input("Enter quest name here: ")
     quests.append(quest)
+    print(f"Quest added confirmed: {quest}")
 
 def list_quests(quests):
-    print("list_quests stub") # Temporary
-    for quest in quests:
-        print(quest)
+    #print("list_quests stub") # Temporary
+    len(quests)
+    if quests == []:
+        print("No quests yet")
+    else:
+        for quest in quests:
+            print(quest)
 
 def complete_quest(quests):
     print("complete_quests stub")

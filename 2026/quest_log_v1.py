@@ -1,5 +1,5 @@
 # Quest Log
-# PF 5.4
+# PF 5.3
 # Samuel Marriott 1/03/2026
 
 import random
@@ -24,7 +24,7 @@ def add_quest(quests):
 
 def list_quests(quests):
     #print("list_quests stub") # Temporary
-    len(quests)
+    #len(quests)
     if quests == []:
         print("No quests yet")
     else:
@@ -54,11 +54,11 @@ def sort_quests_za(quests):
     print("List was reverse sorted.")
 
 def suggest_random_quest(quests):
-    if len(quests) == []:
+    if quests == []:
         print("No quests to choose from.")
     else:
-        random_quest = random.choice(quests)
-        print(random_quest)
+        #random_quest = random.choice(quests)
+        print(random.choice(quests))
 
 def main():
     # TODO: Create an empty list called quests

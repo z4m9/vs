@@ -30,7 +30,7 @@ def list_quests(quests):
     else:
         i = 0
         for quest in quests:
-            print(i,". ", quest)
+            print(i + 1, ". ", quest)
             i += 1
 
 def complete_quest(quests):

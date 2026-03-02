@@ -17,13 +17,13 @@ def show_menu():
     print("7: Quit")
 
 def add_quest(quests):
-    #print("add_quest stub") # Temporary
+    #print("add_quest stub")
     quest = input("Enter quest name here: ")
     quests.append(quest)
     print(f"Quest added confirmed: {quest}")
 
 def list_quests(quests):
-    #print("list_quests stub") # Temporary
+    #print("list_quests stub")
     #len(quests)
     if quests == []:
         print("No quests yet")

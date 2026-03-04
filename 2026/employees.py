@@ -26,13 +26,13 @@ classArray[3] = employee("Hussein", "Wasim", 94756, 7.85)
 classArray[4] = employee("Davis", "Mary", 45820, 8.00)
 classArray[5] = employee("Schmidt", "Heidi", 61922, 7.60)
 
-
 #print(classArray[0].name, "'s class is", classArray[0].regclass)
 
-
-#for x in range(len(classArray)):
+"""for x in range(len(classArray)):
     #print("What is employee", classArray[x].employeeID, "Name?")
-    #classArray[x].name = input("Enter name here: ")
+    #classArray[x].name = input("Enter name here: ")"""
 
 for x in range(len(classArray)):
-    print(f"Employee {x + 1} details: \n First name:", classArray[x].firstName, "\n Surname:", classArray[x].surname, "\n ID number:", classArray[x].employeeID, "\n Pay rate: $", classArray[x].payrate)
+    print(f"Employee {x + 1} details: \n First name:", classArray[x].firstName,
+           "\n Surname:", classArray[x].surname, "\n ID number:", classArray[x].employeeID,
+             "\n Pay rate: $", classArray[x].payrate)

@@ -1,5 +1,6 @@
 # PF6.5 - Hash Table
 # Samuel Marriott 8/03/2026
+# Questions and answers from Line 57
 
 # Student records stored using a dictionary (hash table)
 students = {

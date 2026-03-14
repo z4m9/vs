@@ -1,3 +1,6 @@
+# Main program (Task 1: Stack Modification)
+# Samuel Marriott - 8/03/2026
+
 from collections import deque  # deque = double-ended queue
 
 # -----------------------------

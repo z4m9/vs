@@ -1,3 +1,7 @@
+# OOP Noughts & Crosses
+# Created by Samuel Marriott on 3/04/2026
+# Questions and answers after line 71
+
 class Board:
     def __init__(self):
         self.board = [[" " for _ in range(3)] for _ in range(3)]
@@ -65,3 +69,14 @@ class TicTacToeGame:
 if __name__ == "__main__":
     game = TicTacToeGame()
     game.play()
+
+# Analysis:
+# Q1. Identify the name of one class.
+# A. TicTacToeGame
+# Q2. Identify two attributes used in the program. Look for variables that use self.
+# A. board, current_player
+# Q3. Identify one method (not a constructor) and the class it belongs to.
+# A. The "print_board" method - belongs to the "Board" class.
+
+# Challenge:
+# Q1. 

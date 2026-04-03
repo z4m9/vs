@@ -6,10 +6,10 @@
 
 
 def get_student_details():
-    name1 = input("Enter your name (first & last): ")
+    name = input("Enter your name (first & last): ")
     results = int(input("Enter your assessment results: "))
     max_possible = int(input("What is the possible mark? "))
-    return name1, results, max_possible
+    return name, results, max_possible
 
 # Main
 test = True
@@ -21,9 +21,11 @@ while test:
 
     if percentage < 50 and percentage >= 0:
         print("You failed the assessment, please re-do it.")
-        print(f"Your percentage score: {percentage_rounded}")
+        print(f"Your percentage score: {percentage_rounded}%")
+        test = False
     elif percentage >= 50 and percentage <= 100:
         print("Well done. You passed the assessment.")
-        print(f"Your percentage score: {percentage_rounded}")
+        print(f"Your percentage score: {percentage_rounded}%")
+        test = False
     else:
         print("Please enter a valid score.")

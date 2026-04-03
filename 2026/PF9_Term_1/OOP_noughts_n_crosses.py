@@ -41,7 +41,7 @@ class Board:
 
 class TicTacToeGame:
     def __init__(self):
-        self.board = Board()
+        self.board = Board() # Instantiates the Board class
         self.current_player = "X"
 
     def play(self):
@@ -70,13 +70,29 @@ if __name__ == "__main__":
     game = TicTacToeGame()
     game.play()
 
-# Analysis:
+# ANALYSIS:
+
 # Q1. Identify the name of one class.
 # A. TicTacToeGame
+
 # Q2. Identify two attributes used in the program. Look for variables that use self.
 # A. board, current_player
+
 # Q3. Identify one method (not a constructor) and the class it belongs to.
 # A. The "print_board" method - belongs to the "Board" class.
 
-# Challenge:
-# Q1. 
+
+# CHALLENGE:
+
+# Q1. Explain what the attribute self.board represents in:
+#   a. the Board class
+#   b. the TicTacToeGame class
+# A. 
+#   a. It provides the structure for printing the noughts & crosses board using an integrated for loop.
+#       It creates a 2D list of empty spaces.
+#   b. It instantiates the Board class.
+#       The brackets indicate assigning the instantiated Board class to the self.board attribute.
+
+# Q2. Suggest one additional class that could improve the Tic-Tac-Toe program. Explain what it would store.
+# A. The Player class would store player names.
+#       The players just need to input their names, and they can save their wins.

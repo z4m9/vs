@@ -21,11 +21,11 @@ while test:
 
     if percentage < 50 and percentage >= 0:
         print("You failed the assessment, please re-do it.")
-        print(f"Your percentage score: {percentage_rounded}%")
+        print(f"Your percentage score: {int(percentage_rounded)}%")
         test = False
     elif percentage >= 50 and percentage <= 100:
         print("Well done. You passed the assessment.")
-        print(f"Your percentage score: {percentage_rounded}%")
+        print(f"Your percentage score: {int(percentage_rounded)}%")
         test = False
     else:
         print("Please enter a valid score.")

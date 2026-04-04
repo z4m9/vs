@@ -52,7 +52,10 @@ while True:
             break
 
         else:
-            current_player = 'O' if current_player == 'X' else 'X'
+            if current_player == 'X':
+                current_player = 'O'
+            else:
+                current_player = 'X'
     else:
         print("That cell is already filled. Try again.")
 

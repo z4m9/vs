@@ -48,9 +48,15 @@ def show_intro():
 
 def show_help():
     print("\n📜 Commands you can use:")
-    print("  up / down / left / right  ➡️  move between rooms")
-    print("  help                      ❓ show commands")
-    print("  quit                      🚪 exit the game")
+    print("- up / down / left / right  ➡️  move between rooms")
+    print("- help                      ❓ show commands")
+    print("- quit                      🚪 exit the game")
+    print("- inventory                    check your inventory")
+    print("- pick up item                 collect item")
+    print("- save                         save your progress")
+    print("- load                         load your saved progress")
+    print("- score                        check how many points you have")
+    print("- map                          show map of your current location")
 
     # 👉 Add more commands such as:
     # inventory

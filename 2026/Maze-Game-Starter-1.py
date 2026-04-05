@@ -123,7 +123,8 @@ def game_loop():
 
         # Anything else = invalid
         else:
-            print("\n❌ Invalid command. Type 'help'.")
+            print("\n❌ Invalid command.")
+            show_help()
 
 
 # ----------------------------------

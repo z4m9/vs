@@ -16,34 +16,64 @@
 # 🗺️ ROOMS (ADD MORE APPROPRIATE TO YOUR THEME)
 # ----------------------------------
 rooms = {
-    "Room1": {
+    "Room 1": {
         "desc": "A hint of light is visible ahead.",
-        "forward": "Room2"
+        "forward": "Room 2"
     },
-    "Room2": {
-        "desc": "A long wooden bridge stretches ahead.",
-        "backward": "Room1",
-        "left": "Room3",
-        "right": "Room4",
-        "forward": "Room5"
+    "Room 2": {
+        "desc": "A long wooden bridge stretches ahead, but there is a pile of rocks in the way.",
+        "backward": "Room 1",
+        "left": "Room 3",
+        "right": "Room 4",
+        "forward": "Room 5"
     },
-    "Room3": {
+    "Room 3": {
         "desc": "An item lies in front of you.",
-        "right": "Room2",
-        "up": "Room6"
+        "right": "Room 2",
+        "up": "Room 6"
     },
-    "Room4":{
+    "Room 4":{
         "desc": "An item lies in front of you.",
-        "left": "Room2",
-        "forward": "Room7"
+        "left": "Room 2",
+        "forward": "Room 7"
     },
-    "Room5": {
+    "Room 5": {
         "desc": "A massive cave surrounds."
         "Decide where to go carefully, as one of the bridges will collapse beneath you.",
-        "left": "Room6",
-        "right": "Room7",
-        "forward": "Room10",
-        "backward": "Room2"
+        "left": "Room 6",
+        "right": "Room 7",
+        "forward": "Room 10",
+        "backward": "Room 2"
+    },
+    "Room 6": {
+        "desc": "An item lies and a locked door is in front. You must find the key that opens it.",
+        "forward": "Room 9",
+        "backward": "Room 3",
+        "right": "Room 5"
+    },
+    "Room 7": {
+        "desc": "There is a wave of mobs preventing you from getting further. You must defeat the mobs.",
+        "forward": "Room 8",
+        "backward": "Room 4",
+        "left": "Room 5"
+    },
+    "Room 8":{
+        "desc": "There is a locked door to the right. You must find the key that opens it."
+        "There is another key just beneath you, this is for the door in Room 6. ",
+        "backward": "Room 7",
+        "left": "Room 10"
+    },
+    "Room 9": {
+        "desc": "A set of something and a bottle lies beneath you.",
+        "right": "Room 10",
+        "backward": "Room 6"
+    },
+    "Room 10": {
+        "desc": "There is a monster preventing you from getting the key for the Room 8 door."
+        "You must defeat the monster.",
+        "left": "Room 9",
+        "right": "Room 8",
+        "backward": "Room 5"
     }
 
     # 👉 ADD MORE ROOMS
@@ -118,7 +148,7 @@ def load_game():
         return room, score
     except FileNotFoundError:
         print("\n ⚠️ No saved file found. Starting new game...")
-        return "Room1", 0 # Default starting room and score
+        return "Room 1", 0 # Default starting room and score
 
 # ----------------------------------
 # 📍 SHOW CURRENT ROOM

@@ -69,11 +69,14 @@ def show_help():
 # ----------------------------------
 # 💾 LOAD/SAVE GAME & SCORE
 # ----------------------------------
-def save_game(current_room, inventory):
+def save_game(current_room, inventory, score):
     inventory = []
-    with open("save_file.txt", "w") as file:
-        file.write(current_room + "\n") # Save the current room on the first line
-        file.write(",".join(inventory)) # Save inventory items as a comma_separated list
+    with open("save_file.txt", "w") as game_file:
+        game_file.write(current_room + "\n") # Save the current room on the first line
+        game_file.write(",".join(inventory)) # Save inventory items as a comma_separated list
+    with open("score.txt", "w") as score_file:
+        score_file.write(str(score))
+
     print("\n 💾 Game saved successfully!")
 
 def load_game():
@@ -83,11 +86,15 @@ def load_game():
             lines = file.readlines()
             room = lines[0].strip() # Read the first line for the current room
             inventory = lines[1].strip().split(",") if len(lines) > 1 else [] # Read inventory
+        
+        with open("score.txt", "r") as score_file:
+            score = int(score_file.read().strip())
+
         print("\n 💾 Game loaded successfully!")
-        return room
+        return room, score
     except FileNotFoundError:
         print("\n ⚠️ No saved file found. Starting new game...")
-        return "Room A"
+        return "Room1", 0 # Default starting room and score
 
 # ----------------------------------
 # 📍 SHOW CURRENT ROOM
@@ -142,6 +149,14 @@ def game_loop():
         # Show help
         elif command == "help":
             show_help()
+        
+        # Load saved progress
+        elif command == "load":
+            load_game()
+        
+        # Save game
+        elif command == "save":
+            save_game(current_room, inventory, score)
 
         # Quit game
         elif command == "quit":

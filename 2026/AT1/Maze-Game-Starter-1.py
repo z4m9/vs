@@ -39,13 +39,14 @@ rooms = {
     },
     "Room 4":{
         "desc": "An item lies in front of you.",
-        "item": "diamond pickaxe",
+        "item": "pickaxe",
         "left": "Room 2",
         "forward": "Room 7"
     },
     "Room 5": {
         "desc": "A massive cave surrounds."
         "Decide where to go carefully, as one of the bridges will collapse beneath you.",
+        "item": "shield",
         "left": "Room 6",
         "right": "Room 7",
         "forward": "Room 10",
@@ -54,6 +55,7 @@ rooms = {
     "Room 6": {
         "desc": "An item lies and a locked door is in front. You must find the key that opens it."
         "Note: The key is not the item that lies in front.",
+        "item": "sword",
         "forward": "Room 9",
         "backward": "Room 3",
         "right": "Room 5"
@@ -65,8 +67,8 @@ rooms = {
         "left": "Room 5"
     },
     "Room 8":{
-        "desc": "There is a locked door to the right. You must find the key that opens it."
-        "There is another key just beneath you, this is for the door in Room 6. ",
+        "desc": "There is a locked door to the right. You must find the key that opens it.",
+        "item": "Room 6 key",
         "backward": "Room 7",
         "left": "Room 10"
     },
@@ -89,6 +91,8 @@ rooms = {
 
 # 🎒 Items you collect will go here
 inventory = []
+#def collect_item():
+
 
 # ⭐ You will create a scoring system later
 score = 0
@@ -99,8 +103,8 @@ score = 0
 def show_intro():
     print("\n🏁 Welcome to the Maze Game!")
     print("Explore the maze, collect items and earn points.")
-    print("You must go to each room in numerical order. " \
-        "There will be entities preventing you from skipping numbers")
+    print("You must go to each room in numerical order.")
+    print("There will be entities preventing you from skipping numbers.")
     print("Type 'help' to see commands.\n")
 
 
@@ -110,7 +114,7 @@ def show_help():
     print("- help                   \n ❓ show commands")
     print("- quit                   \n 🚪 exit the game")
     print("- inventory              \n 🎒 check your bag")
-    print("- pick up item           \n 🧹 collect item")
+    print("- pick up                \n 🧹 collect item")
     print("- save                   \n 🛟 save your progress")
     print("- load                   \n 💾 load your saved progress")
     print("- score                  \n ⭐  check how many points you have")
@@ -206,7 +210,6 @@ def show_room(current_room):
     if "item" in rooms[current_room]:
         print("👀 You see:", "".join(rooms[current_room]["item"]))
 
-
 # ----------------------------------
 # 🚶 MOVE BETWEEN ROOMS
 # ----------------------------------
@@ -250,6 +253,10 @@ def game_loop():
         # Show map
         elif command == "map":
             map()
+        
+        # Collect item
+        #elif command == "pick up":
+            
         
         # Load saved progress
         elif command == "load":

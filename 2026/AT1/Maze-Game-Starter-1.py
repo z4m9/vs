@@ -11,6 +11,10 @@
 
 # 💡 You CAN use emojis in descriptions and messages!
 
+# Samuel Marriott
+# Started: 5/04/2026
+# Due finish: 24/04/2026
+# Finished: .../.../2026
 
 # ----------------------------------
 # 🗺️ ROOMS (ADD MORE APPROPRIATE TO YOUR THEME)
@@ -29,11 +33,13 @@ rooms = {
     },
     "Room 3": {
         "desc": "An item lies in front of you.",
+        "item": "emerald",
         "right": "Room 2",
-        "up": "Room 6"
+        "forward": "Room 6"
     },
     "Room 4":{
         "desc": "An item lies in front of you.",
+        "item": "pickaxe",
         "left": "Room 2",
         "forward": "Room 7"
     },
@@ -46,7 +52,8 @@ rooms = {
         "backward": "Room 2"
     },
     "Room 6": {
-        "desc": "An item lies and a locked door is in front. You must find the key that opens it.",
+        "desc": "An item lies and a locked door is in front. You must find the key that opens it."
+        "Note: The key is not the item that lies in front.",
         "forward": "Room 9",
         "backward": "Room 3",
         "right": "Room 5"
@@ -86,13 +93,14 @@ inventory = []
 # ⭐ You will create a scoring system later
 score = 0
 
-
 # ----------------------------------
 # 🎮 INTRO + HELP
 # ----------------------------------
 def show_intro():
     print("\n🏁 Welcome to the Maze Game!")
     print("Explore the maze, collect items and earn points.")
+    print("You must go to each room in numerical order. " \
+        "There will be entities preventing you from skipping numbers")
     print("Type 'help' to see commands.\n")
 
 
@@ -101,7 +109,7 @@ def show_help():
     print("- forward / backward / left / right \n ➡️ move between rooms")
     print("- help                   \n ❓ show commands")
     print("- quit                   \n 🚪 exit the game")
-    print("- inventory              \n 🎒 check your inventory")
+    print("- inventory              \n 🎒 check your bag")
     print("- pick up item           \n 🧹 collect item")
     print("- save                   \n 🛟 save your progress")
     print("- load                   \n 💾 load your saved progress")
@@ -151,17 +159,33 @@ def load_game():
         return "Room 1", 0 # Default starting room and score
 
 # ----------------------------------
+# 🗺️ MAP
+# ----------------------------------
+def map_save():
+    with open("map.txt", "w") as file:
+            file.write("")
+    print("Map saved!")
+
+def map_load():
+    try:
+        with open("map.txt", "r") as file:
+            lines = file.readlines()
+            for each in lines:
+                print(each)
+    except FileNotFoundError:
+        print("File not found.")
+
+
+# ----------------------------------
 # 📍 SHOW CURRENT ROOM
 # ----------------------------------
 def show_room(current_room):
     print(f"\n📍 You are in {current_room}.")
     print(rooms[current_room]["desc"])
 
-    # 👉 When you add items to rooms,
-    # you can show them here like this:
-    #
-    # if "items" in rooms[current_room]:
-    #     print("You see:", ", ".join(rooms[current_room]["items"]), "👀")
+    # 👉 When you add items to rooms, you can show them here like this:
+    if "item" in rooms[current_room]:
+        print("You see:", ", ".join(rooms[current_room]["item"]), "👀")
 
 
 # ----------------------------------
@@ -172,7 +196,7 @@ def move(direction, current_room):
     # Check if the direction exists in this room
     if direction in rooms[current_room]:
         new_room = rooms[current_room][direction]
-        print(f"\n🚶 You move {direction} to {new_room}.")
+        print(f"\n🚶 You moved {direction} to {new_room}.")
         return new_room
 
     # If the direction is not valid
@@ -184,25 +208,32 @@ def move(direction, current_room):
 # 🔁 MAIN GAME LOOP
 # ----------------------------------
 def game_loop():
-
     # Starting room
-    current_room = "Room1"
+    current_room = "Room 1"
     show_intro()
 
     while True:
 
         show_room(current_room)
+        
 
         # Ask the player for a command
         command = input("\n> ").strip().lower()
 
         # Movement commands
-        if command in ("up", "down", "left", "right"):
+        if command in ("forward", "backward", "left", "right"):
             current_room = move(command, current_room)
 
         # Show help
         elif command == "help":
             show_help()
+        
+        # Show map
+        elif command == "save map":
+            map_save()
+        
+        elif command == "load map":
+            map_load()
         
         # Load saved progress
         elif command == "load":

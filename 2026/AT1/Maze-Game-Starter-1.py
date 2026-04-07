@@ -88,9 +88,12 @@ rooms = {
         "backward": "Room 5"
     }
 
+
     # 👉 ADD MORE ROOMS
     # You need at least 8 rooms for the task
 }
+
+start = (214, 36)
 
 # 🎒 Items you collect will go here
 inventory = []
@@ -189,24 +192,24 @@ def map():
     map = [                                                     # ROWS
     list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"), # 0
     list("▒         ▒                ▒                     ▒"), # 1
-    list("▒ 💎  9          👹 10      ▒       💎  8         ▒"), # 2
+    list("▒ 💎             👹         ▒       💎            ▒"), # 2
     list("▒    𐂫   ▒     💎  🔑      👿           🔑        ▒"), # 3
     list("▒         ▒                ▒                     ▒"), # 4
     list("▒▒▒▒🚪▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒"), # 5
     list("▒        ▒                     ▒                 ▒"), # 6
     list("▒        ▒                     ▒                 ▒"), # 7
-    list("▒  🗡️ 6             5 🛡️             👿  7        ▒"), # 8
+    list("▒  🗡️                 🛡️             👿           ▒"), # 8
     list("▒   💎   ▒          💎          ▒      💎         ▒"), # 9
     list("▒        ▒                     ▒                 ▒"), # 10
-    list("▒▒▒▒🪤▒▒▒▒▒▒▒▒▒▒▒▒▒🪨🪨🪨▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🪤▒▒▒▒▒▒▒"), # 11
+    list("▒▒▒▒🪤▒▒▒▒▒▒▒▒▒▒▒▒▒🪨🪨🪨▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒👿▒▒▒▒▒▒▒"), # 11
     list("▒             ▒                  ▒               ▒"), # 12
     list("▒      🔑     ▒                  ▒      💎        ▒"), # 13
-    list("▒    💎 3             💎  2      🚪     4 ⛏️       ▒"), # 14
+    list("▒    💎               💎         🚪       ⛏️       ▒"), # 14
     list("▒             ▒                  ▒               ▒"), # 15
     list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🚪▒"), # 16
     list("                       ▒   ▒                  ▒  ▒"), # 17
     list("                      ▒     ▒                 ▒  ▒"), # 18
-    list("                     ▒   1   ▒                ▒  ▒"), # 19
+    list("                     ▒       ▒                ▒  ▒"), # 19
     list("                    ▒         ▒               ▒  ▒"), # 20
     list("                   ▒▒▒  웃   ▒▒▒               ▒  ▒")  # 21
 ]
@@ -226,6 +229,7 @@ def map():
     print("\n Legend:" \
     "\n - 👿: Mob/monster - you must encounter these to be able to move on." \
     "\n - 🚪: Locked door - use items collected to open these." \
+    "\n - 💎: Gems" \
     "\n - The other symbols are items. You need these to unlock doors or defeat mobs.")
     print("The numbers in each room are the room numbers. \n You must visit each room in numerical order.")
 
@@ -274,7 +278,6 @@ def game_loop():
 
         show_room(current_room)
         
-
         # Ask the player for a command
         command = input("\n> ").strip().lower()
 

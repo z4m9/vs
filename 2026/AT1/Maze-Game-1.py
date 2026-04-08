@@ -22,27 +22,31 @@
 rooms = {
     "Room 1": {
         "desc": "A hint of light is visible ahead.",
-        "forward": "Room 2"
+        "forward": "Room 2",
+        "position": {"r": 21, "c": 25}
     },
     "Room 2": {
         "desc": "A long wooden bridge stretches ahead, but there is a pile of rocks in the way.",
         "backward": "Room 1",
         "left": "Room 3",
         "right": "Room 4",
-        "forward": "Room 5"
+        "forward": "Room 5",
+        "position": {"r": 12, "c": 25}
     },
     "Room 3": {
         "desc": "An item lies in front of you.",
         "item": "💎 emerald",
         "right": "Room 2",
-        "forward": "Room 6"
+        "forward": "Room 6",
+        "position": {"r": 12, "c": 5}
     },
     "Room 4":{
         "desc": "An item lies in front of you."
         "There is a locked door here. You must find the key that opens it.",
         "item": "pickaxe",
         "left": "Room 2",
-        "forward": "Room 7"
+        "forward": "Room 7",
+        "position": {"r": 8, "c": 25}
     },
     "Room 5": {
         "desc": "A massive cave surrounds."
@@ -51,7 +55,8 @@ rooms = {
         "left": "Room 6",
         "right": "Room 7",
         "forward": "Room 10",
-        "backward": "Room 2"
+        "backward": "Room 2",
+        "position": {"r": 8, "c": 5}
     },
     "Room 6": {
         "desc": "An item lies and a locked door is in front. You must find the key that opens it. "
@@ -59,25 +64,29 @@ rooms = {
         "item": "🗡️ sword",
         "forward": "Room 9",
         "backward": "Room 3",
-        "right": "Room 5"
+        "right": "Room 5",
+        "position": {"r": 12, "c": 25}
     },
     "Room 7": {
         "desc": "There is a wave of mobs preventing you from getting further. You must defeat the mobs.",
         "forward": "Room 8",
         "backward": "Room 4",
-        "left": "Room 5"
+        "left": "Room 5",
+        "position": {"r": 3, "c": 5}
     },
     "Room 8":{
         "desc": "There is a locked door to the right. You must find the key that opens it.",
         "item": "Room 6 key",
         "backward": "Room 7",
-        "left": "Room 10"
+        "left": "Room 10",
+        "position": {"r": 3, "c": 35}
     },
     "Room 9": {
         "desc": "A set of something and a bottle lies beneath you.",
         "item": "armour set",
         "right": "Room 10",
-        "backward": "Room 6"
+        "backward": "Room 6",
+        "position": {"r": 8, "c": 35}
     },
     "Room 10": {
         "desc": "There is a monster preventing you from getting the key for the Room 8 door."
@@ -85,7 +94,8 @@ rooms = {
         "item": "Room 8 key",
         "left": "Room 9",
         "right": "Room 8",
-        "backward": "Room 5"
+        "backward": "Room 5",
+        "position": {"r": 14, "c": 35}
     }
 
 
@@ -164,24 +174,10 @@ def load_game():
 # ----------------------------------
 # 🗺️ MAP
 # ----------------------------------
-'''def map_save():
-    with open("map.txt", "w") as file:
-            file.write("")
-    print("Map saved!")
-
-def map_load():
-    try:
-        with open("map.txt", "r") as file:
-            lines = file.readlines()
-            for each in lines:
-                print(each)
-    except FileNotFoundError:
-        print("File not found.")'''
-
 
 # COLUMNS  10        20        30        40        50
          #01234567890123456789012345678901234567890123456789       
-def map1():
+'''def map1():
     map = [                                                     # ROWS
     list("▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"), # 0
     list("▒         ▒                ▒                     ▒"), # 1
@@ -205,7 +201,7 @@ def map1():
     list("                     ▒       ▒                ▒  ▒"), # 19
     list("                    ▒         ▒               ▒  ▒"), # 20
     list("                   ▒▒▒  웃   ▒▒▒               ▒  ▒")  # 21
-]
+]'''
     #01234567890123456789012345678901234567890123456789       
 def map2():
     map = [                                                     # ROWS
@@ -214,13 +210,13 @@ def map2():
         "▒                          ▒                     ▒\n", # 2
         "▒         ▒                                      ▒\n", # 3
         "▒         ▒                ▒                     ▒\n", # 4
-        "▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒\n", # 5
+        "▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒\n", # 5
         "▒        ▒                     ▒                 ▒\n", # 6 
         "▒        ▒                     ▒                 ▒\n", # 7
         "▒        ▒                     ▒                 ▒\n", # 8
         "▒                              ▒                 ▒\n", # 9
         "▒        ▒                     ▒                 ▒\n", # 10
-        "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒\n", # 11
+        "▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒🪨 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒\n", # 11
         "▒             ▒                  ▒               ▒\n", # 12
         "▒             ▒                  ▒               ▒\n", # 13
         "▒                                ▒               ▒\n", # 14
@@ -236,8 +232,6 @@ def map2():
     start_position = [21,25]
    # map[start_position[0]][start_position[1]] = player
     show_map(map)
-
-
 
 def show_map(map):
     r=0  # row zero 
@@ -259,7 +253,7 @@ def show_map(map):
     
 
 # Move '웃' one step right
-def junk():
+def map_refine():
     for y, row in enumerate(map):
         for x, char in enumerate(row):
             if char == '웃':

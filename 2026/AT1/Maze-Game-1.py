@@ -23,7 +23,7 @@ rooms = {
     "Room 1": {
         "desc": "A hint of light is visible ahead.",
         "forward": "Room 2",
-        "position": {"r": 21, "c": 25}
+        "pos": {"r": 21, "c": 24}
     },
     "Room 2": {
         "desc": "A long wooden bridge stretches ahead, but there is a pile of rocks in the way.",
@@ -31,22 +31,22 @@ rooms = {
         "left": "Room 3",
         "right": "Room 4",
         "forward": "Room 5",
-        "position": {"r": 12, "c": 25}
+        "pos": {"r": 14, "c": 24}
     },
     "Room 3": {
         "desc": "An item lies in front of you.",
-        "item": "💎 emerald",
+        "item": "🔑 key",
         "right": "Room 2",
         "forward": "Room 6",
-        "position": {"r": 12, "c": 5}
+        "pos": {"r": 14, "c": 6}
     },
     "Room 4":{
         "desc": "An item lies in front of you."
         "There is a locked door here. You must find the key that opens it.",
-        "item": "pickaxe",
+        "item": "⛏️ pickaxe",
         "left": "Room 2",
         "forward": "Room 7",
-        "position": {"r": 8, "c": 25}
+        "pos": {"r": 14, "c": 39}
     },
     "Room 5": {
         "desc": "A massive cave surrounds."
@@ -56,7 +56,7 @@ rooms = {
         "right": "Room 7",
         "forward": "Room 10",
         "backward": "Room 2",
-        "position": {"r": 8, "c": 5}
+        "pos": {"r": 8, "c": 5}
     },
     "Room 6": {
         "desc": "An item lies and a locked door is in front. You must find the key that opens it. "
@@ -65,28 +65,29 @@ rooms = {
         "forward": "Room 9",
         "backward": "Room 3",
         "right": "Room 5",
-        "position": {"r": 12, "c": 25}
+        "pos": {"r": 12, "c": 25}
     },
     "Room 7": {
-        "desc": "There is a wave of mobs preventing you from getting further. You must defeat the mobs.",
+        "desc": "There is a wave of mobs preventing you from getting further."
+        "Use your sword to defeat the mobs. Use your shield to deflect their attacks.",
         "forward": "Room 8",
         "backward": "Room 4",
         "left": "Room 5",
-        "position": {"r": 3, "c": 5}
+        "pos": {"r": 3, "c": 5}
     },
     "Room 8":{
         "desc": "There is a locked door to the right. You must find the key that opens it.",
         "item": "Room 6 key",
         "backward": "Room 7",
         "left": "Room 10",
-        "position": {"r": 3, "c": 35}
+        "pos": {"r": 3, "c": 40}
     },
     "Room 9": {
         "desc": "A set of something and a bottle lies beneath you.",
         "item": "armour set",
         "right": "Room 10",
         "backward": "Room 6",
-        "position": {"r": 8, "c": 35}
+        "pos": {"r": 8, "c": 35}
     },
     "Room 10": {
         "desc": "There is a monster preventing you from getting the key for the Room 8 door."
@@ -95,7 +96,7 @@ rooms = {
         "left": "Room 9",
         "right": "Room 8",
         "backward": "Room 5",
-        "position": {"r": 14, "c": 35}
+        "pos": {"r": 14, "c": 35}
     }
 
 
@@ -142,10 +143,10 @@ def show_help():
 # ----------------------------------
 def save_game(current_room, inventory, score):
     inventory = []
-    with open("save_file.txt", "w") as game_file:
+    with open("maze_game.txt", "w") as game_file:
         game_file.write(current_room + "\n") # Save the current room on the first line
         game_file.write(",".join(inventory)) # Save inventory items as a comma_separated list
-    with open("score.txt", "w") as score_file:
+    with open("maze_game_score.txt", "w") as score_file:
         score_file.write(str(score))
 
     print("\n 💾 Game saved successfully!")
@@ -153,7 +154,7 @@ def save_game(current_room, inventory, score):
 def load_game():
     global inventory
     try:
-        with open("save_file.txt", "r") as file:
+        with open("maze_game.txt", "r") as file:
             lines = file.readlines()
             room = lines[0].strip() # Read the first line for the current room
             if len(lines) > 1: # Read inventory
@@ -162,7 +163,7 @@ def load_game():
                 inventory = []
 
         
-        with open("score.txt", "r") as score_file:
+        with open("maze_game_score.txt", "r") as score_file:
             score = int(score_file.read().strip())
 
         print("\n 💾 Game loaded successfully!")
@@ -190,7 +191,7 @@ def load_game():
     list("▒  🗡️               🛡️          👿      👿        ▒"), # 8
     list("▒        ▒                     ▒      💎         ▒"), # 9
     list("▒        ▒                     ▒                 ▒"), # 10
-    list("▒▒▒▒🪤▒▒▒▒▒▒▒▒▒▒▒▒▒🪨🪨🪨▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒👿▒▒▒▒▒▒▒"), # 11
+    list("▒▒▒▒🪤▒▒▒▒▒▒▒▒▒▒▒▒▒🪨🪨🪨▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒👿▒▒▒▒▒▒▒▒"), # 11
     list("▒             ▒                  ▒               ▒"), # 12
     list("▒             ▒                  ▒               ▒"), # 13
     list("▒       🔑                       🚪       ⛏️      ▒"), # 14
@@ -202,47 +203,57 @@ def load_game():
     list("                    ▒         ▒               ▒  ▒"), # 20
     list("                   ▒▒▒  웃   ▒▒▒               ▒  ▒")  # 21
 ]'''
-    #01234567890123456789012345678901234567890123456789       
-def map2():
+# COLUMNS  10        20        30        40        50
+           #01234567890123456789012345678901234567890123456789       
+def map2(current_room):
     map = [                                                     # ROWS
         "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n", # 0
         "▒         ▒                ▒                     ▒\n", # 1
         "▒                          ▒                     ▒\n", # 2
-        "▒         ▒                                      ▒\n", # 3
+        "▒         ▒                               🗝️     ▒\n", # 3
         "▒         ▒                ▒                     ▒\n", # 4
-        "▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒\n", # 5
+        "▒▒▒▒🚪▒▒▒▒▒▒▒▒▒▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒\n", # 5
         "▒        ▒                     ▒                 ▒\n", # 6 
         "▒        ▒                     ▒                 ▒\n", # 7
-        "▒        ▒                     ▒                 ▒\n", # 8
-        "▒                              ▒                 ▒\n", # 9
+        "▒                                  👿            ▒\n", # 8
+        "▒        ▒                     ▒                 ▒\n", # 9
         "▒        ▒                     ▒                 ▒\n", # 10
-        "▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒🪨 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒\n", # 11
+        "▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🪨 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒👿▒▒▒▒▒▒▒▒\n", # 11
         "▒             ▒                  ▒               ▒\n", # 12
-        "▒             ▒                  ▒               ▒\n", # 13
-        "▒                                ▒               ▒\n", # 14
+        "▒             ▒           💡     ▒               ▒\n", # 13
+        "▒    🔑                          🚪        ⛏️     ▒\n", # 14
         "▒             ▒                  ▒               ▒\n", # 15
         "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🚪▒\n", # 16
-        "                       ▒   ▒                  ▒  ▒\n", # 17
-        "                      ▒     ▒                 ▒  ▒\n", # 18
-        "                     ▒       ▒                ▒  ▒\n", # 19
-        "                    ▒         ▒               ▒  ▒\n", # 20
-        "                   ▒▒▒      ▒▒▒               ▒  ▒\n"  # 21
+        "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 17
+        "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒     ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 18
+        "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒       ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 19
+        "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒       ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 20
+        "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒     ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n"  # 21
     ]
-   
-    start_position = [21,25]
-   # map[start_position[0]][start_position[1]] = player
-    show_map(map)
+    print("\n Legend:" \
+    "\n - 👿: Mob/monster - you must encounter these to be able to move on." \
+    "\n - 🚪: Locked door - use items collected to open these." \
+    "\n - 💎: Gems - must be collected to repair weapons and armory." \
+    "\n - 🪨 : Rocks - must be cleared to progress." \
+    "\n - 🪤 : Traps - you will die if you walk into these."
+    "\n - The other symbols are items. \nYou need these to unlock doors or defeat mobs.")
+    print("The numbers in each room are the room numbers. \n You must visit each room in numerical order.\n")
 
-def show_map(map):
-    r=0  # row zero 
-    player="웃"
-    rows=len(map)
+   
+    start_pos = [21,25]
+    current_pos = {"r": rooms[current_room]["pos"]["r"], "c": rooms[current_room]["pos"]["c"]}
+    show_map(map, current_pos)
+
+def show_map(map, pos):
+    r = 0  # row zero 
+    player = "웃"
+    rows = len(map)
     while r < rows:
-        c=0
-        rowString=map[r]
-        rowlen=len(rowString)
+        c = 0
+        rowString = map[r]
+        rowlen = len(rowString)
         while c < rowlen:  # print each column in row
-            if c==25 and r == 21:
+            if c == pos["c"] and r == pos["r"]:
                 print(player, end="") 
                 c+=1 # double wide character, so move to next column.
             else:
@@ -266,14 +277,7 @@ def map_refine():
         print("".join(row))
 
 # Legend
-    print("\n Legend:" \
-    "\n - 👿: Mob/monster - you must encounter these to be able to move on." \
-    "\n - 🚪: Locked door - use items collected to open these." \
-    "\n - 💎: Gems - must be collected to repair weapons and armory." \
-    "\n - 🪨: Rocks - must be cleared to progress." \
-    "\n - The other symbols are items. You need these to unlock doors or defeat mobs.")
-    print("The numbers in each room are the room numbers. \n You must visit each room in numerical order.")
-
+    
 # ----------------------------------
 # 📍 SHOW CURRENT ROOM
 # ----------------------------------
@@ -342,7 +346,7 @@ def game_loop():
         
         # Show map
         elif command == "map":
-            map2()
+            map2(current_room)
         
         # Collect item
         elif command == "pick up":

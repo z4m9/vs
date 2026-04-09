@@ -154,8 +154,8 @@ def save_game(current_room, inventory, score):
 def load_game():
     global inventory
     try:
-        with open("maze_game.txt", "r") as file:
-            lines = file.readlines()
+        with open("maze_game.txt", "r") as game_file:
+            lines = game_file.readlines()
             room = lines[0].strip() # Read the first line for the current room
             if len(lines) > 1: # Read inventory
                 inventory = lines[1].strip().split(",")

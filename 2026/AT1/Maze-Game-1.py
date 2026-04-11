@@ -120,8 +120,9 @@ rooms = {
 # Items collected will go here
 inventory = []
 
-
+# Entities exist (global)? True/False
 rocks_exist = True
+monster = True
 
 # ⭐ You will create a scoring system later
 #score = 0
@@ -202,16 +203,16 @@ def map(current_room):
     map = [                                                     # ROWS
         "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n", # 0
         "▒💡       ▒                    ▒               💡▒\n", # 1
-        "▒  💎         👹      🗝️       👿             🏹  ▒\n", # 2
+        "▒  💎         👹      🗝️                     🏹   ▒\n", # 2
         "▒         ▒                    ▒                 ▒\n", # 3
         "▒         ▒                    ▒                 ▒\n", # 4
-        "▒▒▒▒👾▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 5
+        "▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 5
         "▒        ▒💡                   ▒                 ▒\n", # 6 
         "▒        ▒                     ▒                 ▒\n", # 7
-        "▒  🗡️                  🛡️         👿           🧪  ▒\n", # 8
+        "▒  🗡️                  🛡️                     🧪   ▒\n", # 8
         "▒        ▒                     ▒                 ▒\n", # 9
         "▒💡      ▒                     ▒                 ▒\n", # 10
-        "▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒👾▒\n", # 11
+        "▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 11
         "▒             ▒💡                ▒💡             ▒\n", # 12
         "▒             ▒                  ▒               ▒\n", # 13
         "▒    🔑                          🚪           ⛏️  ▒\n", # 14
@@ -248,6 +249,12 @@ def show_map(map, pos):
     rocks = "🪨"
     rocks_pos = {"r": 11, "c": 24}
     player = "웃"
+    sword_monster = "👿",
+    sword_monster_pos = {"r": 2, "c": 31}, {"r": 8, "c": 34}
+    archery_monster = "👾"
+    archery_monster_pos = {"r": 5, "c": 4}, {"r": 11, "c": 48}
+    apex_predator = "👹"
+    apex_predator_pos = {"r": 2, "c": 14}
     rows = len(map)
     while r < rows:
         c = 0

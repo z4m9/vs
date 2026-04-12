@@ -166,7 +166,6 @@ def show_help():
     "\ne.g: If there is a locked door and the player has a key in their \ninventory," \
     " then the key will be used automatically to open that door.")
 
-
 # ----------------------------------
 # 💾 LOAD/SAVE GAME & SCORE
 # ----------------------------------

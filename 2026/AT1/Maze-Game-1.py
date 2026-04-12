@@ -16,6 +16,9 @@
 # Due finish: 24/04/2026
 # Finished: Date/Month/2026
 
+# Bibliography/references:
+# https://www.w3schools.com/python/ref_func_print.asp
+
 # ----------------------------------
 # 🗺️ ROOMS (ADD MORE APPROPRIATE TO YOUR THEME)
 # ----------------------------------
@@ -122,7 +125,9 @@ inventory = []
 
 # Entities exist (global)? True/False
 rocks_exist = True
-monster = True
+sword_monsters = True
+archery_monsters = True
+apex_predator = True
 
 # ⭐ You will create a scoring system later
 #score = 0
@@ -140,18 +145,18 @@ def show_intro():
 
 def show_help():
     print("\n📜 Commands you can use:")
-    print("- forward / backward / left / right \n ➡️ move between rooms")
-    print("- help                   \n ❓ show commands")
-    print("- quit                   \n 🚪 exit the game")
-    print("- inventory              \n 🎒 check your bag")
-    print("- pick up                \n 🧹 collect item")
-    print("- save                   \n 🛟 save your progress")
-    print("- load                   \n 💾 load your saved progress")
-    print("- score                  \n ⭐  check how many points you have")
-    print("- map                    \n 🗺️  show map of your current location")
-    print("- use                    \n use the desired item")
+    print(" forward / backward / left / right \n\t➡️ move between rooms")
+    print(" help                   \n\t❓ show commands")
+    print(" quit                   \n\t🚪 exit the game")
+    print(" inventory              \n\t🎒 check your bag")
+    print(" pick up                \n\t🧹 collect item")
+    print(" save                   \n\t🛟 save your progress")
+    print(" load                   \n\t💾 load your saved progress")
+    print(" score                  \n\t⭐  check how many points you have")
+    print(" map                    \n\t🗺️  show map of your current location")
+    print(" use                    \n\tuse the desired item")
     print("You may wonder, 'How do I use the items I collected? '" \
-    "\nThe answer is, your character will automatically use the item based on the circumstance. " \
+    "\nThe answer is, use, or sometimes your character will \nautomatically use the item based on the circumstance. " \
     "\ne.g: If there is a locked door and the player has a key in their \ninventory," \
     " then the key will be used automatically to open that door.")
     # 👉 Add more commands such as:
@@ -172,7 +177,7 @@ def save_game(current_room, inventory, score):
     with open("maze_game_score.txt", "w") as score_file:
         score_file.write(str(score))
 
-    print("\n 💾 Game saved successfully!")
+    print("\n\t💾 Game saved successfully!")
 
 def load_game():
     global inventory
@@ -188,10 +193,10 @@ def load_game():
         with open("maze_game_score.txt", "r") as score_file:
             score = int(score_file.read().strip())
 
-        print("\n 💾 Game loaded successfully!")
+        print("\n\t💾 Game loaded successfully!")
         return room, score
     except FileNotFoundError:
-        print("\n ⚠️ No saved file found. Starting new game...")
+        print("\n\t⚠️ No saved file found. Starting new game...")
         return "Room 1 - Start", 0 # Default starting room and score
 
 # ----------------------------------
@@ -225,21 +230,21 @@ def map(current_room):
         "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒     ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n"  # 21
     ]
     # Legend
-    print("\n Legend:" \
-    "\n - 👿: Monster - defeat with a sword only. " \
+    print("\n\tLegend:" \
+    "\n\t👿: Monster, defeat with a sword only. " \
     "\nWill throw you back into the current room if you fail to do so." \
-    "\n - 웃: Your character - each time you want to see the map," \
-    "\n your character will be displayed in its current position." \
-    "\n - 👾: Monster - defeat with a bow and arrows only. " \
+    "\n\t웃: Your character, each time you want to see the map," \
+    "\n\tyour character will be displayed in its current position." \
+    "\n\t👾: Monster, defeat with a bow and arrows only. " \
     "\nWill throw you back into the current room if you fail to do so." \
-    "\n - 👹: Apex predator - defeat with a bow and arrows and a sword." \
-    "\n - 🚪: Locked door - use items collected to open these." \
-    "\n - 💎: Gems - must be collected to repair weapons and armory." \
-    "\n - 🪨 : Rocks - must be cleared to progress." \
-    "\n - 🪤 : Traps - you will die if you walk into these." \
-    "\n - 💡: Lights - will help you to navigate through the dark passages."
-    "\n - The other symbols are items. \nYou need these to unlock doors or defeat monsters.")
-    print("The numbers in each room are the room numbers. \n You must visit each room in numerical order.\n")
+    "\n\t👹: Apex predator, defeat with a bow and arrows and a sword." \
+    "\n\t🚪: Locked door, use items collected to open these." \
+    "\n\t💎: Gems, must be collected to repair weapons and armory." \
+    "\n\t🪨 : Rocks, must be cleared to progress." \
+    "\n\t🪤 : Traps, you will die if you walk into these." \
+    "\n\t💡: Lights, will help you to navigate through the dark passages."
+    "\n\tThe other symbols are items. \nYou need these to unlock doors or defeat monsters.")
+    print("The numbers in each room are the room numbers. \n\tYou must visit each room in numerical order.\n")
 
     current_pos = {"r": rooms[current_room]["pos"]["r"], "c": rooms[current_room]["pos"]["c"]}
     show_map(map, current_pos)
@@ -263,14 +268,19 @@ def show_map(map, pos):
         while c < rowlen:  # print each column in row
             if c == pos["c"] and r == pos["r"]:
                 print(player, end = "") 
-                c+=1 # double wide character, so move to next column.
+                c += 1 # double wide character, so move to next column.
             elif c == rocks_pos["c"] and r == rocks_pos["r"] and rocks_exist:
                 print(rocks, end = "")
+            elif c == sword_monster_pos["c"] and r == sword_monster_pos["r"] and sword_monsters:
+                print(sword_monster, end = "")
+            elif c == archery_monster_pos["c"] and r == archery_monster_pos["r"] and archery_monsters:
+                print(archery_monster, end = "")
+            elif c == apex_predator_pos["c"] and r == apex_predator_pos["r"] and apex_predator:
+                print(apex_predator, end = "")
             else:
-                print(rowString[c], end = "") 
-                # https://www.w3schools.com/python/ref_func_print.asp
-            c+=1
-        r+=1
+                print(rowString[c], end = "")
+            c += 1
+        r += 1
     
 # ----------------------------------
 # 📍 SHOW CURRENT ROOM
@@ -282,7 +292,7 @@ def show_room(current_room, score):
 
     # 👉 When you add items to rooms, you can show them here like this:
     if "item" in rooms[current_room]:
-        print("👀 You have found a(n):", "".join(rooms[current_room]["item"]))
+        print("👀 You have found a ", "".join(rooms[current_room]["item"]))
     else:
         print("No item here.")
 
@@ -302,8 +312,11 @@ def collect_item(current_room):
 
 # Use the items collected
 def use_item(new_room):
-    if new_room == "Room 5" and "requires" in inventory:
+    if new_room == "Room 2" and "pick axe" in inventory:
         rocks_exist = False
+        print(f"The rocks have been removed from blocking the door")
+    else:
+        print(f"Nothing happened.")
 
 
 
@@ -324,7 +337,7 @@ def move(direction, current_room):
         new_room = rooms[current_room][direction]
         # Check if new room has a requirement, and if passages have traps and/or monsters.
         if "requires" in rooms[new_room] and rooms[new_room]["requires"] not in inventory:
-            print(f"\n 🔒 You need a {rooms[new_room]['requires']} to enter {new_room}!")
+            print(f"\n\t🔒 You need a {rooms[new_room]['requires']} to enter {new_room}!")
             score -= 10
             return current_room # Stay in the current room
         elif current_room == "Room 3" and direction == "forward" or current_room == "Room 6" and direction == "backward":
@@ -384,7 +397,7 @@ def game_loop():
         
         # Use item
         elif command == "use":
-            use_item()
+            use_item(current_room)
 
         # Check inventory
         elif command == "inventory":

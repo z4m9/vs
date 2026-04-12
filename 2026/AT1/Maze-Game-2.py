@@ -120,7 +120,7 @@ rooms = {
         "right": "Room 8",
         "backward": "Room 5",
         "pos": {"r": 2, "c": 21},
-        "apex_predator": True ,
+        "apex_predator": True,
         "apex_pred_pos": {"r": 2, "c": 14},
         "sword_monster": True,
         "sword_mon_pos": {"r": 3, "c": 16}
@@ -351,8 +351,6 @@ def death():
     init_rooms()
     return "Room 1 - Start"
 
-
-
 # ----------------------------------
 # 🚶 MOVE BETWEEN ROOMS
 # ----------------------------------
@@ -392,6 +390,18 @@ def game_loop():
     show_intro()
 
     while True:
+        if current_room == "Room 11 - Finish":
+            print(rooms[current_room]["desc"])
+            score += 100
+            print(f"Your final score: {score}")
+            save_game(current_room, inventory, score)
+            play_again = input("Would you like to play again? ").strip().lower()
+            if play_again == "no":
+                print("👋 Thanks for playing!")
+                break
+            else:
+                game_loop()
+
         show_room(current_room)
         
         # Ask the player for a command

@@ -22,6 +22,9 @@
 # ----------------------------------
 # 🗺️ ROOMS (ADD MORE APPROPRIATE TO YOUR THEME)
 # ----------------------------------
+rooms = {}
+def init_rooms():
+    global rooms
 rooms = {
     "Room 1 - Start": {
         "desc": "A hint of light is visible ahead.",
@@ -34,7 +37,9 @@ rooms = {
         "left": "Room 3",
         "right": "Room 4",
         "forward": "Room 5",
-        "pos": {"r": 14, "c": 24}
+        "pos": {"r": 14, "c": 24},
+        "rocksfall": True,
+        "rocksfall_pos": {"r": 11, "c": 24}
     },
     "Room 3": {
         "desc": "An item lies on your left.",
@@ -51,7 +56,9 @@ rooms = {
         "left": "Room 2",
         "forward": "Room 7",
         "backward": "Room 11 - Finish",
-        "pos": {"r": 14, "c": 46}
+        "pos": {"r": 14, "c": 46},
+        "archr_monster": True,
+        "archr_mon_pos": {"r": 12, "c": 40}
     },
     "Room 5": {
         "desc": "A massive cave surrounds. "
@@ -71,7 +78,9 @@ rooms = {
         "forward": "Room 9",
         "backward": "Room 3",
         "right": "Room 5",
-        "pos": {"r": 8, "c": 5}
+        "pos": {"r": 8, "c": 5},
+        "archr_monster": True,
+        "archr_mon_pos": {"r": 5, "c": 4}
     },
     "Room 7": {
         "desc": "There is a wave of mobs preventing you from getting further."
@@ -81,7 +90,9 @@ rooms = {
         "forward": "Room 8",
         "backward": "Room 4",
         "left": "Room 5",
-        "pos": {"r": 8, "c": 48}
+        "pos": {"r": 8, "c": 48},
+        "sword_monster": True,
+        "sword_mon_pos": {"r": 2, "c": 31}
     },
     "Room 8":{
         "desc": "",
@@ -108,27 +119,24 @@ rooms = {
         "left": "Room 9",
         "right": "Room 8",
         "backward": "Room 5",
-        "pos": {"r": 2, "c": 21}
+        "pos": {"r": 2, "c": 21},
+        "apex_predator": True ,
+        "apex_pred_pos": {"r": 2, "c": 14},
+        "sword_monster": True,
+        "sword_mon_pos": {"r": 3, "c": 16}
     },
     "Room 11 - Finish": {
         "desc": "Well done! You have successfully made it out of the mineshaft.",
         "requires": "🗝️ ancient key",
         "pos": {"r": 20, "c": 46}
     }
-
-    # 👉 ADD MORE ROOMS
-    # You need at least 8 rooms for the task
 }
 
 # Items collected will go here
 inventory = []
 
-# Entities exist (global)? True/False
-rocks_exist = True
-sword_monsters = True
-archery_monsters = True
-apex_predator = True
-
+# ⭐  scoring system 
+score = 0
 
 # ----------------------------------
 # 🎮 INTRO + HELP
@@ -143,7 +151,7 @@ def show_intro():
 
 def show_help():
     print("\n📜 Commands you can use:")
-    print(" forward / backward / left / right \n\t ➡️ move between rooms")
+    print(" forward / backward / left / right \n\t➡️ move between rooms")
     print(" help                   \n\t❓ show commands")
     print(" quit                   \n\t🚪 exit the game")
     print(" inventory              \n\t🎒 check your bag")
@@ -151,24 +159,18 @@ def show_help():
     print(" save                   \n\t🛟 save your progress")
     print(" load                   \n\t💾 load your saved progress")
     print(" score                  \n\t⭐  check how many points you have")
-    print(" map                    \n\t 🗺️  show map of your current location")
-    print(" use                    \n\t use the desired item")
+    print(" map                    \n\t🗺️  show map of your current location")
+    print(" use                    \n\tuse the desired item")
     print("You may wonder, 'How do I use the items I collected? '" \
     "\nThe answer is, use, or sometimes your character will \nautomatically use the item based on the circumstance. " \
     "\ne.g: If there is a locked door and the player has a key in their \ninventory," \
     " then the key will be used automatically to open that door.")
-    # 👉 Add more commands such as:
-    # inventory
-    # pick up item
-    # save
-    # load
-    # score
-    # map
+
 
 # ----------------------------------
 # 💾 LOAD/SAVE GAME & SCORE
 # ----------------------------------
-def save_game(current_room, inventory, score):
+def save_game(current_room, inventory):
     with open("maze_game.txt", "w") as game_file:
         game_file.write(current_room + "\n") # Save the current room on the first line
         game_file.write(",".join(inventory)) # Save inventory items as a comma_separated list
@@ -179,6 +181,7 @@ def save_game(current_room, inventory, score):
 
 def load_game():
     global inventory
+    global score
     try:
         with open("maze_game.txt", "r") as game_file:
             lines = game_file.readlines()
@@ -192,9 +195,9 @@ def load_game():
             score = int(score_file.read().strip())
 
         print("\n\t💾 Game loaded successfully!")
-        return room, score
+        return room
     except FileNotFoundError:
-        print("\n\t ⚠️ No saved file found. Starting new game...")
+        print("\n\t⚠️ No saved file found. Starting new game...")
         return "Room 1 - Start", 0 # Default starting room and score
 
 # ----------------------------------
@@ -206,16 +209,16 @@ def map(current_room):
     map = [                                                     # ROWS
         "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n", # 0
         "▒💡       ▒                    ▒               💡▒\n", # 1
-        "▒  💎                 🗝️                    🏹  ▒\n", # 2
+        "▒  💎               🗝️                     🏹   ▒\n", # 2
         "▒         ▒                    ▒                 ▒\n", # 3
         "▒         ▒                    ▒                 ▒\n", # 4
-        "▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 5
+        "▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 5
         "▒        ▒💡                   ▒                 ▒\n", # 6 
         "▒        ▒                     ▒                 ▒\n", # 7
-        "▒  🗡️                  🛡️                     🧪  ▒\n", # 8
+        "▒  🗡️                  🛡️                     🧪   ▒\n", # 8
         "▒        ▒                     ▒                 ▒\n", # 9
         "▒💡      ▒                     ▒                 ▒\n", # 10
-        "▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒ ▒\n", # 11
+        "▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 11
         "▒             ▒💡                ▒💡             ▒\n", # 12
         "▒             ▒                  ▒               ▒\n", # 13
         "▒    🔑                          🚪           ⛏️  ▒\n", # 14
@@ -240,43 +243,45 @@ def map(current_room):
     "\n\t💎: Gems, must be collected to repair weapons and armory." \
     "\n\t🪨 : Rocks, must be cleared to progress." \
     "\n\t🪤 : Traps, you will die if you walk into these." \
-    "\n\t💡: Lights, will help you to navigate through \nthe dark passages."
+    "\n\t💡: Lights, will help you to navigate through the dark passages."
     "\n\tThe other symbols are items. \nYou need these to unlock doors or defeat monsters.")
     print("The numbers in each room are the room numbers. \n\tYou must visit each room in numerical order.\n")
 
     current_pos = {"r": rooms[current_room]["pos"]["r"], "c": rooms[current_room]["pos"]["c"]}
     show_map(map, current_pos)
 
-def show_map(map, pos):
+def show_map(map, player_pos):
     r = 0  # row zero
-    rocks = "🪨"
-    rocks_pos = {"r": 11, "c": 24}
-    player = "웃"
-    sword_monster = "👿"
-    sword_monster_1_pos = {"r": 2, "c": 30}
-    sword_monster_2_pos = {"r": 8, "c": 36}
-    archery_monster = "👾"
-    archery_monster_1_pos = {"r": 5, "c": 4}
-    archery_monster_2_pos = {"r": 11, "c": 47}
-    apex_predator = "👹"
-    apex_predator_pos = {"r": 2, "c": 14}
+    player_icon = "웃"
+    rocksfall_icon = "🪨"
+    sword_monster_icon = "👿"
+    archr_monster_icon = "👾"
+    apex_predator_icon = "👹"
     rows = len(map)
-    while r < rows:
+    while r < rows:         # iterate through each row
         c = 0
         rowString = map[r]
         rowlen = len(rowString)
         while c < rowlen:  # print each column in row
-            if c == pos["c"] and r == pos["r"]:
-                print(player, end = "") 
+            if c == player_pos["c"] and r == player_pos["r"]:
+                print(player_icon, end = "") 
                 c += 1 # double wide character, so move to next column.
-            elif c == rocks_pos["c"] and r == rocks_pos["r"] and rocks_exist:
-                print(rocks, end = "")
-            elif c == sword_monster_1_pos["c"] and r == sword_monster_1_pos["r"] or c == sword_monster_2_pos["c"] and r == sword_monster_2_pos["r"] and sword_monsters:
-                print(sword_monster, end = "")
-            elif c == archery_monster_1_pos["c"] and r == archery_monster_1_pos["r"] or r == archery_monster_2_pos["r"] and c == archery_monster_2_pos["c"] and archery_monsters:
-                print(archery_monster, end = "")
-            elif c == apex_predator_pos["c"] and r == apex_predator_pos["r"] and apex_predator:
-                print(apex_predator, end = "")
+            elif c == rooms["Room 2"]["rocksfall_pos"]["c"] and r == rooms["Room 2"]["rocksfall_pos"]["r"] and rooms["Room 2"]["rocksfall"]:
+                print(rocksfall_icon, end = "")
+            elif c == rooms["Room 4"]["archr_mon_pos"]["c"] and r == rooms["Room 4"]["archr_mon_pos"]["r"] and rooms["Room 4"]["archr_monster"]:
+                print(archr_monster_icon, end = "")
+                c += 1 
+            elif c == rooms["Room 6"]["archr_mon_pos"]["c"] and r == rooms["Room 6"]["archr_mon_pos"]["r"] and rooms["Room 6"]["archr_monster"]:
+                print(archr_monster_icon, end = "")
+                c += 1 
+            elif c == rooms["Room 7"]["sword_mon_pos"]["c"] and r == rooms["Room 7"]["sword_mon_pos"]["r"] and rooms["Room 7"]["sword_monster"]:
+                print(sword_monster_icon, end = "")  
+                #c += 1 
+            elif c == rooms["Room 10"]["apex_pred_pos"]["c"] and r == rooms["Room 10"]["apex_pred_pos"]["r"] and rooms["Room 10"]["apex_predator"]:
+                print(apex_predator_icon, end = "")
+            elif c == rooms["Room 10"]["sword_mon_pos"]["c"] and r == rooms["Room 10"]["sword_mon_pos"]["r"] and rooms["Room 10"]["sword_monster"]:
+                print(sword_monster_icon, end = "")  
+                c += 1
             else:
                 print(rowString[c], end = "")
             c += 1
@@ -285,14 +290,15 @@ def show_map(map, pos):
 # ----------------------------------
 # 📍 SHOW CURRENT ROOM
 # ----------------------------------
-def show_room(current_room, score):
+def show_room(current_room):
     print(f"\n📍 You are in {current_room}.")
     print(rooms[current_room]["desc"])
     print(f"Your current score: {score}")
 
     # 👉 When you add items to rooms, you can show them here like this:
     if "item" in rooms[current_room]:
-        print("👀 You have found a ", "".join(rooms[current_room]["item"]))
+        if rooms[current_room]["item"] != "":
+            print("👀 You have found a ", "".join(rooms[current_room]["item"]))
     else:
         print("No item here.")
 
@@ -300,7 +306,11 @@ def show_room(current_room, score):
 def collect_item(current_room):
     if "item" in rooms[current_room]:
         inventory.append(rooms[current_room]["item"])
-        value = 10
+        print(f"10 points! for collecting the {rooms[current_room]['item']}")
+        rooms[current_room]["desc"] = f"\nYou have collected the {rooms[current_room]['item']}."
+        rooms[current_room]['item'] = "" # Remove the item from the room
+        global score
+        score += 10
         print(inventory)
     elif "item" in inventory:
         print("This item is already in your posession!")
@@ -308,20 +318,21 @@ def collect_item(current_room):
     else:
         print("No item to collect in this room.")
         print(inventory)
-    return value
+
 
 # Use the items collected
 def use_item(current_room):
-    global rocks_exist
-    if current_room == "Room 5" and "requires" in inventory:
-        rocks_exist = False
-        print(f"The rocks have been mined from the passage.")
-        score += 30
+    if current_room == "Room 2" and "⛏️ pickaxe" in inventory:
+        global rocksfall
+        rocksfall = False
+        print(f"20 points! for removing the rocks from blocking the way.")
+        rooms[current_room]["desc"] = "\nThe rocks have been removed, you can now move forward."
+        global score
+        score += 20
     else:
         print(f"Nothing happened.")
 
-# ⭐ You will create a scoring system later
-score = 0
+
 
 # Check inventory
 def check_bag():
@@ -329,6 +340,18 @@ def check_bag():
         print("You have nothing in your bag.")
     else:
         print(f"You have {inventory} in your bag.")
+
+# you die if you step on a trap or a fight a monster without a weapon, and you will be thrown back to start.
+def death():
+    global inventory
+    inventory = []
+    global score
+    print(f"You have died. Final score: {score}")
+    score = 0
+    init_rooms()
+    return "Room 1 - Start"
+
+
 
 # ----------------------------------
 # 🚶 MOVE BETWEEN ROOMS
@@ -342,18 +365,15 @@ def move(direction, current_room):
         if "requires" in rooms[new_room] and rooms[new_room]["requires"] not in inventory:
             print(f"\n\t🔒 You need a {rooms[new_room]['requires']} to enter {new_room}!")
             return current_room # Stay in the current room
-        elif current_room == "Room 3" and direction == "forward" or current_room == "Room 6" and direction == "backward":
+        elif (current_room == "Room 3" and direction == "forward") or (current_room == "Room 6" and direction == "backward"):
             print("Bad luck. You stepped on a plate and you were impaled in the chest by an arrow.")
-            current_room = "Room 1 - Start"
-            inventory = []
-            score = 0
-            show_room(current_room, score)
-        elif current_room == "Room 5" and direction == "forward" or current_room == "Room 10" and direction == "backward":
-            print("Nice try. The bridge collapsed beneath you and you fell to your death.")
-            current_room = "Room 1 - Start"
-            inventory = []
-            score = 0
-            show_room(current_room, score)
+            return death()
+        elif (current_room == "Room 5" and direction == "forward") or (current_room == "Room 10" and direction == "backward"):
+            print("Nice try. The bridge collapsed beneath you and you fell into the abyss.")
+            return death()
+        elif current_room == "Room 11 - Finish":
+            print(rooms[current_room]["desc"])
+            print(f"Your final score: {score}")
         else:
             print(f"\n🚶 You moved {direction} to {new_room}.")
             return new_room
@@ -367,25 +387,12 @@ def move(direction, current_room):
 # 🔁 MAIN GAME LOOP
 # ----------------------------------
 def game_loop():
-    score = 0
     # Starting room
     current_room = "Room 1 - Start"
     show_intro()
 
     while True:
-        if current_room == "Room 11 - Finish":
-            print(rooms[current_room]["desc"])
-            score += 100
-            print(f"Your final score: {score}")
-            save_game(current_room, inventory, score)
-            play_again = input("Would you like to play again? ").strip().lower()
-            if play_again == "no":
-                print("👋 Thanks for playing!")
-                break
-            else:
-                game_loop()
-
-        show_room(current_room, score)
+        show_room(current_room)
         
         # Ask the player for a command
         command = input("\n> ").strip().lower()
@@ -404,7 +411,7 @@ def game_loop():
         
         # Collect item
         elif command == "pick up":
-            score += collect_item(current_room)
+            collect_item(current_room)
         
         # Use item
         elif command == "use":
@@ -416,13 +423,12 @@ def game_loop():
         
         # Save game
         elif command == "save":
-            save_game(current_room, inventory, score)
+            save_game(current_room, inventory)
 
         # Load saved progress
         elif command == "load":
             loaded = load_game()
-            current_room = loaded[0]
-            score = loaded[1]
+            current_room = loaded
 
         # Quit game
         elif command == "quit":

@@ -22,115 +22,113 @@
 # ----------------------------------
 # 🗺️ ROOMS (ADD MORE APPROPRIATE TO YOUR THEME)
 # ----------------------------------
-rooms = {}
+#rooms = {}
 def init_rooms():
     global rooms
-rooms = {
-    "Room 1 - Start": {
-        "desc": "A hint of light is visible ahead.",
-        "forward": "Room 2",
-        "pos": {"r": 21, "c": 24}
-    },
-    "Room 2": {
-        "desc": "A long wooden bridge stretches ahead, but there is a pile of rocks in the way.",
-        "backward": "Room 1",
-        "left": "Room 3",
-        "right": "Room 4",
-        "forward": "Room 5",
-        "pos": {"r": 14, "c": 24},
-        "rocksfall": True,
-        "rocksfall_pos": {"r": 11, "c": 24}
-    },
-    "Room 3": {
-        "desc": "An item lies on your left.",
-        "item": "🔑 key",
-        "right": "Room 2",
-        "forward": "Room 6",
-        "pos": {"r": 14, "c": 6}
-    },
-    "Room 4":{
-        "desc": "An item lies in front of you, and there is a locked door behind. "
-        "\nYou must find the ancient key that opens it.",
-        "requires": "🔑 key",
-        "item": "⛏️ pickaxe",
-        "left": "Room 2",
-        "forward": "Room 7",
-        "backward": "Room 11 - Finish",
-        "pos": {"r": 14, "c": 46},
-        "archr_monster": True,
-        "archr_mon_pos": {"r": 12, "c": 40}
-    },
-    "Room 5": {
-        "desc": "A massive cave surrounds. "
-        "Decide where to go carefully, as one of the bridges will collapse beneath you.",
-        "item": "🛡️ shield",
-        "requires": "⛏️ pickaxe",
-        "left": "Room 6",
-        "right": "Room 7",
-        "forward": "Room 10",
-        "backward": "Room 2",
-        "pos": {"r": 8, "c": 25}
-    },
-    "Room 6": {
-        "desc": "An item lies and a monster is in front. You must find the weapon that defeats it. "
-        "Note: The key is not the item that lies in front.",
-        "item": "🗡️ sword",
-        "forward": "Room 9",
-        "backward": "Room 3",
-        "right": "Room 5",
-        "pos": {"r": 8, "c": 5},
-        "archr_monster": True,
-        "archr_mon_pos": {"r": 5, "c": 4}
-    },
-    "Room 7": {
-        "desc": "There is a wave of mobs preventing you from getting further."
-        "Use your sword to defeat the mobs. Use your shield to deflect their attacks.",
-        "item": "🧪 regeneration potion",
-        "requires": "🗡️ sword",
-        "forward": "Room 8",
-        "backward": "Room 4",
-        "left": "Room 5",
-        "pos": {"r": 8, "c": 48},
-        "sword_monster": True,
-        "sword_mon_pos": {"r": 2, "c": 31}
-    },
-    "Room 8":{
-        "desc": "",
-        "requires": "🧪 regeneration potion",
-        "item": "🏹 bow & arrows",
-        "backward": "Room 7",
-        "left": "Room 10",
-        "pos": {"r": 2, "c": 44}
-    },
-    "Room 9": {
-        "desc": "The apex predator is in the room to your right.",
-        "item": "💎 gemstone",
-        "requires": "🏹 bow & arrows",
-        "right": "Room 10",
-        "backward": "Room 6",
-        "pos": {"r": 2, "c": 4}
-    },
-    "Room 10": {
-        "desc": "Well done! You have successfully defeated the apex predator."
-        "Go back to Room 4 and unlock the door to finish the game."
-        "You must defeat the monster.",
-        "requires": "🛡️ shield",
-        "item": "🗝️ ancient key",
-        "left": "Room 9",
-        "right": "Room 8",
-        "backward": "Room 5",
-        "pos": {"r": 2, "c": 21},
-        "apex_predator": True,
-        "apex_pred_pos": {"r": 2, "c": 14},
-        "sword_monster": True,
-        "sword_mon_pos": {"r": 3, "c": 16}
-    },
-    "Room 11 - Finish": {
-        "desc": "Well done! You have successfully made it out of the mineshaft.",
-        "requires": "🗝️ ancient key",
-        "pos": {"r": 20, "c": 46}
+    rooms = {
+        "Room 1 - Start": {
+            "desc": "A hint of light is visible ahead.",
+            "forward": "Room 2",
+            "pos": {"r": 21, "c": 24}
+        },
+        "Room 2": {
+            "desc": "A long wooden bridge stretches ahead, but there is a pile of rocks in the way.",
+            "backward": "Room 1",
+            "left": "Room 3",
+            "right": "Room 4",
+            "forward": "Room 5",
+            "pos": {"r": 14, "c": 24},
+            "rocksfall": True,
+            "rocksfall_pos": {"r": 11, "c": 24}
+        },
+        "Room 3": {
+            "desc": "An item lies on your left.",
+            "item": "🔑 key",
+            "right": "Room 2",
+            "forward": "Room 6",
+            "pos": {"r": 14, "c": 6}
+        },
+        "Room 4":{
+            "desc": "An item lies in front of you, and there is a locked door behind. "
+            "\nYou must find the ancient key that opens it.",
+            "requires": "🔑 key",
+            "item": "⛏️ pickaxe",
+            "left": "Room 2",
+            "forward": "Room 7",
+            "backward": "Room 11 - Finish",
+            "pos": {"r": 14, "c": 46},
+            "archer_monster": True,
+            "archer_mon_pos": {"r": 11, "c": 47}
+        },
+        "Room 5": {
+            "desc": "A massive cave surrounds. "
+            "Decide where to go carefully, as one of the bridges will collapse beneath you.",
+            "item": "🛡️ shield",
+            "left": "Room 6",
+            "right": "Room 7",
+            "forward": "Room 10",
+            "backward": "Room 2",
+            "pos": {"r": 8, "c": 25}
+        },
+        "Room 6": {
+            "desc": "An item lies and a monster is in front. You must find the weapon that defeats it. "
+            "Note: The key is not the item that lies in front.",
+            "item": "🗡️ sword",
+            "forward": "Room 9",
+            "backward": "Room 3",
+            "right": "Room 5",
+            "pos": {"r": 8, "c": 5},
+            "archer_monster": True,
+            "archer_mon_pos": {"r": 5, "c": 4}
+        },
+        "Room 7": {
+            "desc": "There is a wave of mobs preventing you from getting further."
+            "Use your sword to defeat the mobs. Use your shield to deflect their attacks.",
+            "item": "🧪 regeneration potion",
+            "requires": "🗡️ sword",
+            "forward": "Room 8",
+            "backward": "Room 4",
+            "left": "Room 5",
+            "pos": {"r": 8, "c": 48},
+            "sword_monster": True,
+            "sword_mon_pos": {"r": 2, "c": 30}
+        },
+        "Room 8":{
+            "desc": "",
+            "requires": "🧪 regeneration potion",
+            "item": "🏹 bow & arrows",
+            "backward": "Room 7",
+            "left": "Room 10",
+            "pos": {"r": 2, "c": 44}
+        },
+        "Room 9": {
+            "desc": "The apex predator is in the room to your right.",
+            "item": "💎 gemstone",
+            "requires": "🏹 bow & arrows",
+            "right": "Room 10",
+            "backward": "Room 6",
+            "pos": {"r": 2, "c": 4}
+        },
+            "Room 10": {
+            "desc": "Well done! You have successfully defeated the apex predator."
+            "Go back to Room 4 and unlock the door to finish the game."
+            "You must defeat the monster.",
+            "item": "🗝️ ancient key",
+            "left": "Room 9",
+            "right": "Room 8",
+            "backward": "Room 5",
+            "pos": {"r": 2, "c": 21},
+            "apex_predator": True,
+            "apex_pred_pos": {"r": 2, "c": 14},
+            "sword_monster": True,
+            "sword_mon_pos": {"r": 8, "c": 35}
+        },
+        "Room 11 - Finish": {
+            "desc": "Well done! You have successfully made it out of the mineshaft.",
+            "requires": "🗝️ ancient key",
+            "pos": {"r": 20, "c": 46}
+        }
     }
-}
 
 # Items collected will go here
 inventory = []
@@ -150,8 +148,8 @@ def show_intro():
 
 
 def show_help():
-    print("\n📜 Commands you can use:")
-    print(" forward / backward / left / right \n\t➡️ move between rooms")
+    print("\n📜 Things you can do:")
+    print(" Move: forward / backward / left / right \n\t ➡️ move between rooms")
     print(" help                   \n\t❓ show commands")
     print(" quit                   \n\t🚪 exit the game")
     print(" inventory              \n\t🎒 check your bag")
@@ -159,7 +157,7 @@ def show_help():
     print(" save                   \n\t🛟 save your progress")
     print(" load                   \n\t💾 load your saved progress")
     print(" score                  \n\t⭐  check how many points you have")
-    print(" map                    \n\t🗺️  show map of your current location")
+    print(" map                    \n\t 🗺️  show map of your current location")
     print(" use                    \n\tuse the desired item")
     print("You may wonder, 'How do I use the items I collected? '" \
     "\nThe answer is, use, or sometimes your character will \nautomatically use the item based on the circumstance. " \
@@ -196,7 +194,7 @@ def load_game():
         print("\n\t💾 Game loaded successfully!")
         return room
     except FileNotFoundError:
-        print("\n\t⚠️ No saved file found. Starting new game...")
+        print("\n\t ⚠️ No saved file found. Starting new game...")
         return "Room 1 - Start", 0 # Default starting room and score
 
 # ----------------------------------
@@ -231,19 +229,19 @@ def map(current_room):
     ]
     # Legend
     print("\n\tLegend:" \
-    "\n\t👿: Monster, defeat with a sword only. " \
-    "\nWill throw you back into the current room if you fail to do so." \
+    "\n\t👿: Sword monster, defeat with a sword only. " \
+    "\nWill kill you if you fail to do so." \
     "\n\t웃: Your character, each time you want to see the map," \
     "\n\tyour character will be displayed in its current position." \
-    "\n\t👾: Monster, defeat with a bow and arrows only. " \
-    "\nWill throw you back into the current room if you fail to do so." \
+    "\n\t👾: Archery monster, defeat with a bow and arrows only. " \
+    "\nWill kill you if you fail to do so." \
     "\n\t👹: Apex predator, defeat with a bow and arrows and a sword." \
     "\n\t🚪: Locked door, use items collected to open these." \
     "\n\t💎: Gems, must be collected to repair weapons and armory." \
     "\n\t🪨 : Rocks, must be cleared to progress." \
     "\n\t🪤 : Traps, you will die if you walk into these." \
     "\n\t💡: Lights, will help you to navigate through the dark passages."
-    "\n\tThe other symbols are items. \nYou need these to unlock doors or defeat monsters.")
+    "\n\tThe other symbols are items. \nYou need these to unlock doors or defeat monsters. \nThey will disappear off the map once collected.")
     print("The numbers in each room are the room numbers. \n\tYou must visit each room in numerical order.\n")
 
     current_pos = {"r": rooms[current_room]["pos"]["r"], "c": rooms[current_room]["pos"]["c"]}
@@ -254,7 +252,7 @@ def show_map(map, player_pos):
     player_icon = "웃"
     rocksfall_icon = "🪨"
     sword_monster_icon = "👿"
-    archr_monster_icon = "👾"
+    archer_monster_icon = "👾"
     apex_predator_icon = "👹"
     rows = len(map)
     while r < rows:         # iterate through each row
@@ -267,11 +265,11 @@ def show_map(map, player_pos):
                 c += 1 # double wide character, so move to next column.
             elif c == rooms["Room 2"]["rocksfall_pos"]["c"] and r == rooms["Room 2"]["rocksfall_pos"]["r"] and rooms["Room 2"]["rocksfall"]:
                 print(rocksfall_icon, end = "")
-            elif c == rooms["Room 4"]["archr_mon_pos"]["c"] and r == rooms["Room 4"]["archr_mon_pos"]["r"] and rooms["Room 4"]["archr_monster"]:
-                print(archr_monster_icon, end = "")
+            elif c == rooms["Room 4"]["archer_mon_pos"]["c"] and r == rooms["Room 4"]["archer_mon_pos"]["r"] and rooms["Room 4"]["archer_monster"]:
+                print(archer_monster_icon, end = "")
                 c += 1 
-            elif c == rooms["Room 6"]["archr_mon_pos"]["c"] and r == rooms["Room 6"]["archr_mon_pos"]["r"] and rooms["Room 6"]["archr_monster"]:
-                print(archr_monster_icon, end = "")
+            elif c == rooms["Room 6"]["archer_mon_pos"]["c"] and r == rooms["Room 6"]["archer_mon_pos"]["r"] and rooms["Room 6"]["archer_monster"]:
+                print(archer_monster_icon, end = "")
                 c += 1 
             elif c == rooms["Room 7"]["sword_mon_pos"]["c"] and r == rooms["Room 7"]["sword_mon_pos"]["r"] and rooms["Room 7"]["sword_monster"]:
                 print(sword_monster_icon, end = "")  
@@ -329,9 +327,7 @@ def use_item(current_room):
         global score
         score += 20
     else:
-        print(f"Nothing happened.")
-
-
+        print("Nothing happened.")
 
 # Check inventory
 def check_bag():
@@ -363,14 +359,17 @@ def move(direction, current_room):
             print(f"\n\t🔒 You need a {rooms[new_room]['requires']} to enter {new_room}!")
             return current_room # Stay in the current room
         elif (current_room == "Room 3" and direction == "forward") or (current_room == "Room 6" and direction == "backward"):
-            print("Bad luck. You stepped on a plate and you were impaled in the chest by an arrow.")
+            print("Bad luck. You stepped on a plate and you were impaled by an arrow.")
             return death()
         elif (current_room == "Room 5" and direction == "forward") or (current_room == "Room 10" and direction == "backward"):
             print("Nice try. The bridge collapsed beneath you and you fell into the abyss.")
             return death()
-        elif current_room == "Room 11 - Finish":
-            print(rooms[current_room]["desc"])
-            print(f"Your final score: {score}")
+        elif current_room == "Room 10" and "🛡️ shield" not in inventory:
+            print("You didn't have a shield on you, so the apex predator had an easy win.")
+            return death()
+        elif current_room == "Room 2" and direction == "forward" and "rocksfall" == True: # Rocks cleared?
+            print("⛔ You must clear the rock pile first!")
+            return "Room 2" # Stay in Room 2
         else:
             print(f"\n🚶 You moved {direction} to {new_room}.")
             return new_room
@@ -385,6 +384,7 @@ def move(direction, current_room):
 # ----------------------------------
 def game_loop():
     # Starting room
+    score = 0
     current_room = "Room 1 - Start"
     show_intro()
 
@@ -393,7 +393,7 @@ def game_loop():
             print(rooms[current_room]["desc"])
             score += 100
             print(f"Your final score: {score}")
-            save_game(current_room, inventory, score)
+            save_game(current_room, inventory)
             play_again = input("Would you like to play again? ").strip().lower()
             if play_again == "no":
                 print("👋 Thanks for playing!")

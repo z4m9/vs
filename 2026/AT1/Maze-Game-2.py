@@ -22,113 +22,113 @@
 # ----------------------------------
 # 🗺️ ROOMS (ADD MORE APPROPRIATE TO YOUR THEME)
 # ----------------------------------
-#rooms = {}
+rooms = {}
 def init_rooms():
     global rooms
-    rooms = {
-        "Room 1 - Start": {
-            "desc": "A hint of light is visible ahead.",
+rooms = {
+    "Room 1 - Start": {
+        "desc": "A hint of light is visible ahead.",
             "forward": "Room 2",
-            "pos": {"r": 21, "c": 24}
-        },
-        "Room 2": {
-            "desc": "A long wooden bridge stretches ahead, but there is a pile of rocks in the way.",
-            "backward": "Room 1",
-            "left": "Room 3",
-            "right": "Room 4",
-            "forward": "Room 5",
-            "pos": {"r": 14, "c": 24},
-            "rocksfall": True,
-            "rocksfall_pos": {"r": 11, "c": 24}
-        },
-        "Room 3": {
-            "desc": "An item lies on your left.",
-            "item": "🔑 key",
-            "right": "Room 2",
-            "forward": "Room 6",
-            "pos": {"r": 14, "c": 6}
-        },
-        "Room 4":{
-            "desc": "An item lies in front of you, and there is a locked door behind. "
-            "\nYou must find the ancient key that opens it.",
-            "requires": "🔑 key",
-            "item": "⛏️ pickaxe",
-            "left": "Room 2",
-            "forward": "Room 7",
-            "backward": "Room 11 - Finish",
-            "pos": {"r": 14, "c": 46},
-            "archer_monster": True,
-            "archer_mon_pos": {"r": 11, "c": 47}
-        },
-        "Room 5": {
-            "desc": "A massive cave surrounds. "
-            "Decide where to go carefully, as one of the bridges will collapse beneath you.",
-            "item": "🛡️ shield",
-            "left": "Room 6",
-            "right": "Room 7",
-            "forward": "Room 10",
-            "backward": "Room 2",
-            "pos": {"r": 8, "c": 25}
-        },
-        "Room 6": {
-            "desc": "An item lies and a monster is in front. You must find the weapon that defeats it. "
-            "Note: The key is not the item that lies in front.",
-            "item": "🗡️ sword",
-            "forward": "Room 9",
-            "backward": "Room 3",
-            "right": "Room 5",
-            "pos": {"r": 8, "c": 5},
-            "archer_monster": True,
-            "archer_mon_pos": {"r": 5, "c": 4}
-        },
-        "Room 7": {
-            "desc": "There is a wave of mobs preventing you from getting further."
-            "Use your sword to defeat the mobs. Use your shield to deflect their attacks.",
-            "item": "🧪 regeneration potion",
-            "requires": "🗡️ sword",
-            "forward": "Room 8",
-            "backward": "Room 4",
-            "left": "Room 5",
-            "pos": {"r": 8, "c": 48},
-            "sword_monster": True,
-            "sword_mon_pos": {"r": 2, "c": 30}
-        },
-        "Room 8":{
-            "desc": "",
-            "requires": "🧪 regeneration potion",
-            "item": "🏹 bow & arrows",
-            "backward": "Room 7",
-            "left": "Room 10",
-            "pos": {"r": 2, "c": 44}
-        },
-        "Room 9": {
-            "desc": "The apex predator is in the room to your right.",
-            "item": "💎 gemstone",
-            "requires": "🏹 bow & arrows",
-            "right": "Room 10",
-            "backward": "Room 6",
-            "pos": {"r": 2, "c": 4}
-        },
-            "Room 10": {
-            "desc": "Well done! You have successfully defeated the apex predator."
-            "Go back to Room 4 and unlock the door to finish the game."
-            "You must defeat the monster.",
-            "item": "🗝️ ancient key",
-            "left": "Room 9",
-            "right": "Room 8",
-            "backward": "Room 5",
-            "pos": {"r": 2, "c": 21},
-            "apex_predator": True,
-            "apex_pred_pos": {"r": 2, "c": 14},
-            "sword_monster": True,
-            "sword_mon_pos": {"r": 8, "c": 35}
-        },
-        "Room 11 - Finish": {
-            "desc": "Well done! You have successfully made it out of the mineshaft.",
-            "requires": "🗝️ ancient key",
-            "pos": {"r": 20, "c": 46}
-        }
+        "pos": {"r": 21, "c": 24}
+    },
+    "Room 2": {
+        "desc": "A long wooden bridge stretches ahead, but there is a pile of rocks in the way.",
+        "backward": "Room 1",
+        "left": "Room 3",
+        "right": "Room 4",
+        "forward": "Room 5",
+        "pos": {"r": 14, "c": 24},
+        "rocksfall": True,
+        "rocksfall_pos": {"r": 11, "c": 24}
+    },
+    "Room 3": {
+        "desc": "An item lies on your left.",
+        "item": "🔑 key",
+        "right": "Room 2",
+        "forward": "Room 6",
+        "pos": {"r": 14, "c": 6}
+    },
+    "Room 4":{
+        "desc": "An item lies in front of you, and there is a locked door behind. "
+        "\nYou must find the ancient key that opens it.",
+        "requires": "🔑 key",
+        "item": "⛏️ pickaxe",
+        "left": "Room 2",
+        "forward": "Room 7",
+        "backward": "Room 11 - Finish",
+        "pos": {"r": 14, "c": 46},
+        "archer_monster": True,
+        "archer_mon_pos": {"r": 11, "c": 47}
+    },
+    "Room 5": {
+        "desc": "A massive cave surrounds. "
+        "Decide where to go carefully, as one of the bridges will collapse beneath you.",
+        "item": "🛡️ shield",
+        "left": "Room 6",
+        "right": "Room 7",
+        "forward": "Room 10",
+        "backward": "Room 2",
+        "pos": {"r": 8, "c": 25}
+    },
+    "Room 6": {
+        "desc": "An item lies and a monster is in front. You must find the weapon that defeats it. "
+        "Note: The key is not the item that lies in front.",
+        "item": "🗡️ sword",
+        "forward": "Room 9",
+        "backward": "Room 3",
+    "right": "Room 5",
+        "pos": {"r": 8, "c": 5},
+        "archer_monster": True,
+        "archer_mon_pos": {"r": 5, "c": 4}
+    },
+    "Room 7": {
+        "desc": "There is a wave of mobs preventing you from getting further."
+        "Use your sword to defeat the mobs. Use your shield to deflect their attacks.",
+        "item": "🧪 regeneration potion",
+        "requires": "🗡️ sword",
+        "forward": "Room 8",
+        "backward": "Room 4",
+        "left": "Room 5",
+        "pos": {"r": 8, "c": 48},
+        "sword_monster": True,
+        "sword_mon_pos": {"r": 2, "c": 30}
+    },
+    "Room 8":{
+        "desc": "",
+        "requires": "🧪 regeneration potion",
+        "item": "🏹 bow & arrows",
+        "backward": "Room 7",
+        "left": "Room 10",
+        "pos": {"r": 2, "c": 44}
+    },
+    "Room 9": {
+        "desc": "The apex predator is in the room to your right.",
+        "item": "💎 gemstone",
+        "requires": "🏹 bow & arrows",
+        "right": "Room 10",
+        "backward": "Room 6",
+        "pos": {"r": 2, "c": 4}
+    },
+    "Room 10": {
+        "desc": "Well done! You have successfully defeated the apex predator."
+        "Go back to Room 4 and unlock the door to finish the game."
+        "You must defeat the monster.",
+        "item": "🗝️ ancient key",
+        "left": "Room 9",
+        "right": "Room 8",
+        "backward": "Room 5",
+        "pos": {"r": 2, "c": 21},
+        "apex_predator": True,
+        "apex_pred_pos": {"r": 2, "c": 14},
+        "sword_monster": True,
+        "sword_mon_pos": {"r": 8, "c": 35}
+    },
+    "Room 11 - Finish": {
+        "desc": "Well done! You have successfully made it out of the mineshaft.",
+        "requires": "🗝️ ancient key",
+        "pos": {"r": 20, "c": 46}
     }
+}
 
 # Items collected will go here
 inventory = []

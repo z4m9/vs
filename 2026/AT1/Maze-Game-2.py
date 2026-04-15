@@ -12,9 +12,10 @@
 # 💡 You CAN use emojis in descriptions and messages!
 
 # Samuel Marriott
-# Started: 5/04/2026
+# AT notification posted: 12/03/2026
+# Started: 5/04/2026 (25 days after post date)
 # Due finish: 24/04/2026
-# Finished: Date/Month/2026
+# Finished: Date/Month/2026 ([how many] days before/after due date)
 
 # Bibliography/references:
 # https://www.w3schools.com/python/ref_func_print.asp
@@ -27,12 +28,14 @@ def init_rooms():
     global rooms
 rooms = {
     "Room 1 - Start": {
-        "desc": "A hint of light is visible ahead.",
-            "forward": "Room 2",
+        "desc": "A hint of light is visible ahead. "
+        "You can go: forward.",
+        "forward": "Room 2",
         "pos": {"r": 21, "c": 24}
     },
     "Room 2": {
-        "desc": "A long wooden bridge stretches ahead, but there is a pile of rocks in the way.",
+        "desc": "A long wooden bridge stretches ahead, but there is a pile of rocks in the way. "
+        "You can go: forward, backward, left, or right.",
         "backward": "Room 1",
         "left": "Room 3",
         "right": "Room 4",
@@ -42,17 +45,21 @@ rooms = {
         "rocksfall_pos": {"r": 11, "c": 24}
     },
     "Room 3": {
-        "desc": "An item lies on your left.",
+        "desc": "An item lies on your left. You can go: forward, or right.",
         "item": "🔑 key",
+        "item_TF": True,
+        "item_pos": {"r": 14, "c": 5},
         "right": "Room 2",
         "forward": "Room 6",
-        "pos": {"r": 14, "c": 6}
+        "pos": {"r": 14, "c": 4}
     },
     "Room 4":{
         "desc": "An item lies in front of you, and there is a locked door behind. "
-        "\nYou must find the ancient key that opens it.",
+        "\nYou must find the ancient key that opens it.\nYou can go: forward, backward, or left.",
         "requires": "🔑 key",
         "item": "⛏️ pickaxe",
+        "item_TF": True,
+        "item_pos": {"r": 14, "c": 44},
         "left": "Room 2",
         "forward": "Room 7",
         "backward": "Room 11 - Finish",
@@ -62,8 +69,11 @@ rooms = {
     },
     "Room 5": {
         "desc": "A massive cave surrounds. "
-        "Decide where to go carefully, as one of the bridges will collapse beneath you.",
+        "Decide where to go carefully, as one of the bridges will collapse beneath you."
+        "You can go: forward, backward, left, or right.",
         "item": "🛡️ shield",
+        "item_TF": True,
+        "item_pos": {"r": 8, "c": 24},
         "left": "Room 6",
         "right": "Room 7",
         "forward": "Room 10",
@@ -72,19 +82,24 @@ rooms = {
     },
     "Room 6": {
         "desc": "An item lies and a monster is in front. You must find the weapon that defeats it. "
-        "Note: The key is not the item that lies in front.",
+        "Note: The key is not the item that lies in front. You can go: forward, backward, or right.",
         "item": "🗡️ sword",
+        "item_TF": True,
+        "item_pos": {"r": 8, "c": 3},
         "forward": "Room 9",
         "backward": "Room 3",
-    "right": "Room 5",
+        "right": "Room 5",
         "pos": {"r": 8, "c": 5},
         "archer_monster": True,
         "archer_mon_pos": {"r": 5, "c": 4}
     },
     "Room 7": {
         "desc": "There is a wave of mobs preventing you from getting further."
-        "Use your sword to defeat the mobs. Use your shield to deflect their attacks.",
+        "Use your sword to defeat the mobs. Use your shield to deflect their attacks."
+        "You can go: forward, backward, or left",
         "item": "🧪 regeneration potion",
+        "item_TF": True,
+        "item_pos": {"r": 8, "c": 45},
         "requires": "🗡️ sword",
         "forward": "Room 8",
         "backward": "Room 4",
@@ -94,16 +109,20 @@ rooms = {
         "sword_mon_pos": {"r": 2, "c": 30}
     },
     "Room 8":{
-        "desc": "",
+        "desc": "There is a weapon here. You can go: backward, or left.",
         "requires": "🧪 regeneration potion",
         "item": "🏹 bow & arrows",
+        "item_TF": True,
+        "item_pos": {"r": 2, "c": 42},
         "backward": "Room 7",
         "left": "Room 10",
         "pos": {"r": 2, "c": 44}
     },
     "Room 9": {
-        "desc": "The apex predator is in the room to your right.",
-        "item": "💎 gemstone",
+        "desc": "The apex predator is in the room to your right. You can go: backward, or right.",
+        "item": "💎 diamond",
+        "item_TF": True,
+        "item_pos": {"r": 2, "c": 3},
         "requires": "🏹 bow & arrows",
         "right": "Room 10",
         "backward": "Room 6",
@@ -111,9 +130,12 @@ rooms = {
     },
     "Room 10": {
         "desc": "Well done! You have successfully defeated the apex predator."
+        "You can go: backward, left, or right."
         "Go back to Room 4 and unlock the door to finish the game."
         "You must defeat the monster.",
         "item": "🗝️ ancient key",
+        "item_TF": True,
+        "item_pos": {"r": 2, "c": 23},
         "left": "Room 9",
         "right": "Room 8",
         "backward": "Room 5",
@@ -123,12 +145,15 @@ rooms = {
         "sword_monster": True,
         "sword_mon_pos": {"r": 8, "c": 35}
     },
-    "Room 11 - Finish": {
+    "Room 11 - Finish": { # This is not actually a room, it is just the exit out of the mineshaft.
         "desc": "Well done! You have successfully made it out of the mineshaft.",
         "requires": "🗝️ ancient key",
         "pos": {"r": 20, "c": 46}
     }
 }
+# Entity booleans
+rocksfall = True
+sword_monster = True
 
 # Items collected will go here
 inventory = []
@@ -205,20 +230,20 @@ def load_game():
 def map(current_room):
     map = [                                                     # ROWS
         "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒\n", # 0
-        "▒💡       ▒                    ▒               💡▒\n", # 1
-        "▒  💎               🗝️                     🏹   ▒\n", # 2
-        "▒         ▒                    ▒                 ▒\n", # 3
-        "▒         ▒                    ▒                 ▒\n", # 4
+        "▒💡       ▒                    ▒               💡 ▒\n", # 1
+        "▒                                                 ▒\n", # 2
+        "▒         ▒                    ▒                  ▒\n", # 3
+        "▒         ▒                    ▒                  ▒\n", # 4
         "▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 5
-        "▒        ▒💡                   ▒                 ▒\n", # 6 
+        "▒        ▒💡                   ▒                  ▒\n", # 6 
         "▒        ▒                     ▒                 ▒\n", # 7
-        "▒  🗡️                  🛡️                     🧪   ▒\n", # 8
+        "▒                                               ▒\n", # 8
         "▒        ▒                     ▒                 ▒\n", # 9
-        "▒💡      ▒                     ▒                 ▒\n", # 10
+        "▒💡      ▒                     ▒                  ▒\n", # 10
         "▒▒▒▒🪤 ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 11
-        "▒             ▒💡                ▒💡             ▒\n", # 12
+        "▒             ▒💡                ▒💡              ▒\n", # 12
         "▒             ▒                  ▒               ▒\n", # 13
-        "▒    🔑                          🚪           ⛏️  ▒\n", # 14
+        "▒                               🚪               ▒\n", # 14
         "▒💡           ▒                  ▒               ▒\n", # 15
         "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒🚪▒\n", # 16
         "▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒\n", # 17
@@ -229,15 +254,14 @@ def map(current_room):
     ]
     # Legend
     print("\n\tLegend:" \
-    "\n\t👿: Sword monster, defeat with a sword only. " \
+    "\n\t👿: Sword monster, defeat with a sword only." \
     "\nWill kill you if you fail to do so." \
     "\n\t웃: Your character, each time you want to see the map," \
     "\n\tyour character will be displayed in its current position." \
-    "\n\t👾: Archery monster, defeat with a bow and arrows only. " \
+    "\n\t👾: Archery monster, defeat with a bow and arrows only." \
     "\nWill kill you if you fail to do so." \
     "\n\t👹: Apex predator, defeat with a bow and arrows and a sword." \
     "\n\t🚪: Locked door, use items collected to open these." \
-    "\n\t💎: Gems, must be collected to repair weapons and armory." \
     "\n\t🪨 : Rocks, must be cleared to progress." \
     "\n\t🪤 : Traps, you will die if you walk into these." \
     "\n\t💡: Lights, will help you to navigate through the dark passages."
@@ -251,6 +275,14 @@ def show_map(map, player_pos):
     r = 0  # row zero
     player_icon = "웃"
     rocksfall_icon = "🪨"
+    item_pickaxe_icon = "⛏️"
+    item_key_icon = "🔑"
+    item_shield_icon = "🛡️"
+    item_diamond_icon = "💎"
+    item_sword_icon = "🗡️"
+    item_regeneration_potion_icon = "🧪"
+    item_bow_icon = "🏹"
+    item_ancient_key_icon = "🗝️"
     sword_monster_icon = "👿"
     archer_monster_icon = "👾"
     apex_predator_icon = "👹"
@@ -265,20 +297,36 @@ def show_map(map, player_pos):
                 c += 1 # double wide character, so move to next column.
             elif c == rooms["Room 2"]["rocksfall_pos"]["c"] and r == rooms["Room 2"]["rocksfall_pos"]["r"] and rooms["Room 2"]["rocksfall"]:
                 print(rocksfall_icon, end = "")
+            elif c == rooms["Room 3"]["item_pos"]["c"] and r == rooms["Room 3"]["item_pos"]["r"] and rooms["Room 3"]["item_TF"]:
+                print(item_key_icon, end = "")
             elif c == rooms["Room 4"]["archer_mon_pos"]["c"] and r == rooms["Room 4"]["archer_mon_pos"]["r"] and rooms["Room 4"]["archer_monster"]:
                 print(archer_monster_icon, end = "")
-                c += 1 
+                c += 1
+            elif c == rooms["Room 4"]["item_pos"]["c"] and r == rooms["Room 4"]["item_pos"]["r"] and rooms["Room 4"]["item_TF"]:
+                print(item_pickaxe_icon, end = "") 
+            elif c == rooms["Room 5"]["item_pos"]["c"] and r == rooms["Room 5"]["item_pos"]["r"] and rooms["Room 5"]["item_TF"]:
+                print(item_shield_icon, end = "")
             elif c == rooms["Room 6"]["archer_mon_pos"]["c"] and r == rooms["Room 6"]["archer_mon_pos"]["r"] and rooms["Room 6"]["archer_monster"]:
                 print(archer_monster_icon, end = "")
-                c += 1 
+                c += 1
+            elif c == rooms["Room 6"]["item_pos"]["c"] and r == rooms["Room 6"]["item_pos"]["r"] and rooms["Room 6"]["item_TF"]:
+                print(item_sword_icon, end = "") 
             elif c == rooms["Room 7"]["sword_mon_pos"]["c"] and r == rooms["Room 7"]["sword_mon_pos"]["r"] and rooms["Room 7"]["sword_monster"]:
                 print(sword_monster_icon, end = "")  
                 #c += 1 
+            elif c == rooms["Room 7"]["item_pos"]["c"] and r == rooms["Room 7"]["item_pos"]["r"] and rooms["Room 7"]["item_TF"]:
+                print(item_regeneration_potion_icon, end = "")
+            elif c == rooms["Room 8"]["item_pos"]["c"] and r == rooms["Room 8"]["item_pos"]["r"] and rooms["Room 8"]["item_TF"]:
+                print(item_bow_icon, end = "")
+            elif c == rooms["Room 9"]["item_pos"]["c"] and r == rooms["Room 9"]["item_pos"]["r"] and rooms["Room 9"]["item_TF"]:
+                print(item_diamond_icon, end = "")
             elif c == rooms["Room 10"]["apex_pred_pos"]["c"] and r == rooms["Room 10"]["apex_pred_pos"]["r"] and rooms["Room 10"]["apex_predator"]:
                 print(apex_predator_icon, end = "")
             elif c == rooms["Room 10"]["sword_mon_pos"]["c"] and r == rooms["Room 10"]["sword_mon_pos"]["r"] and rooms["Room 10"]["sword_monster"]:
                 print(sword_monster_icon, end = "")  
                 c += 1
+            elif c == rooms["Room 10"]["item_pos"]["c"] and r == rooms["Room 10"]["item_pos"]["r"] and rooms["Room 10"]["item_TF"]:
+                print(item_ancient_key_icon, end = "")
             else:
                 print(rowString[c], end = "")
             c += 1
@@ -295,7 +343,7 @@ def show_room(current_room):
     # 👉 When you add items to rooms, you can show them here like this:
     if "item" in rooms[current_room]:
         if rooms[current_room]["item"] != "":
-            print("👀 You have found a ", "".join(rooms[current_room]["item"]))
+            print("👀 You have found a ", (rooms[current_room]["item"]))
     else:
         print("No item here.")
 
@@ -321,8 +369,7 @@ def collect_item(current_room):
 def use_item(current_room):
     if current_room == "Room 2" and "⛏️ pickaxe" in inventory:
         global rocksfall
-        rocksfall = False
-        print(f"20 points! for removing the rocks from blocking the way.")
+        print(f"You have cleared the rocks. You got 20 points.")
         rooms[current_room]["desc"] = "\nThe rocks have been removed, you can now move forward."
         global score
         score += 20

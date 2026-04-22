@@ -7,7 +7,7 @@
 # ✔ items you can collect 🎒
 # ✔ scoring ⭐
 # ✔ save/load 💾
-# ✔ clear instructions for the user
+# ✔ clear instructions for the use
 
 # 💡 You CAN use emojis in descriptions and messages!
 

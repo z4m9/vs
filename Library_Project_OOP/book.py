@@ -1,6 +1,9 @@
 # OOP Library Book Class - Samuel Marriott
 
-class Book:
+# Importing from Abstract Base Classes (ABC) module
+from abc import ABC, abstractmethod
+
+class Book(ABC):
 
     num_of_books = 0
     borrow_limit = 30
@@ -43,10 +46,16 @@ class Book:
             f"Author: {self.__author}\n"
             f"Available: {'Yes' if self.available else 'No'}"
         )
+    
+    # Abstraction
+    @abstractmethod
+    def borrow_item(self):
+        pass
 
     def __str__(self):
         return f"{self.__title} by {self.__author}"
 
+# Inheritance - Subclasses
 class FictionBook(Book):
     def __init__(self, title, author, genre, available = True):
         super().__init__(title, author, available)
@@ -66,6 +75,13 @@ class FictionBook(Book):
             f"Genre: {self.__genre}\n"
             f"Available: {'Yes' if self.available else 'No'}"
         )
+    
+    def borrow_item(self):
+        if self.available:
+            self.available = False
+            return f"You have borrowed '{self.title}'. Please return it within {self.borrow_limit} days."
+        else:
+            return f"'{self.title}' has already been borrowed."
 
 class ReferenceBook(Book):
     def __init__(self, title, author, library_section, available = True):
@@ -86,6 +102,9 @@ class ReferenceBook(Book):
             f"Library Section: {self.__library_section}\n"
             f"Available: {'Yes' if self.available else 'No'}"
         )
+    
+    def borrow_item(self):
+        return f"'{self.title}' is for library use only."
 
 book1 = Book("1984", "George Orwell")
 book2 = Book("To Kill a Mockingbird", "Harper Lee", False)

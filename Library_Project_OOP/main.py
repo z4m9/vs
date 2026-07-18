@@ -8,20 +8,23 @@ from user import User, StudentUser, StaffUser, AdminUser
 #book2 = Book("To Kill a Mockingbird", "Harper Lee", False)
 
 # User Objects
-user1 = User("Alice", "U001")
-user2 = User("Bob", "U002")
+#user1 = User("Alice", "U001")
+#user2 = User("Bob", "U002")
 
 # Subclass objects (User)
 student1 = StudentUser("Charlie Ward", "S001", "Student")
 staff1 = StaffUser("David Smith", "ST001", "Staff Member")
 admin1 = AdminUser("Eve Johnson", "A001", "Library Admin")
 
-users = [student1, staff1, admin1]
+print(student1.display_info())
+print(staff1.display_info())
+print(admin1.display_info())
+#users = [student1, staff1, admin1]
 
-print()
-for user in users:
-    print(user.display_info())
-    print()
+#print()
+#for user in users:
+ #   print(user.display_info())
+  #  print()
 
 # Subclass objects (Book)
 fiction1 = FictionBook("The Great Gatsby", "F. Scott Fitzgerald", "Classic")
@@ -32,6 +35,7 @@ print(fiction1.borrow_item())
 
 print(f"\n{reference1.display_info()}")
 print(reference1.borrow_item())
+
 
 #books = [fiction1, reference1]
 

@@ -1,4 +1,5 @@
 # OOP Library User Class Samuel Marriott
+from abc import ABC, abstractmethod
 
 class User:
     num_of_users = 0
@@ -45,7 +46,12 @@ class User:
     def deactivate(self):
         self.is_active = False
 
-class StudentUser(User):
+class LibraryUser(User, ABC):
+    @abstractmethod
+    def get_loan_period(self):
+        pass
+
+class StudentUser(LibraryUser):
     def __init__(self, name, user_id, year_level):
         self.__year_level = year_level
         super().__init__(name, user_id)
@@ -63,8 +69,11 @@ class StudentUser(User):
             f"ID: {self.user_id}\n"
             f"Active: {'Yes' if self.is_active else 'No'}"
         )
+    
+    def get_loan_period(self):
+        return "Loan period for Student users is", 14, "days."
 
-class StaffUser(User):
+class StaffUser(LibraryUser):
     def __init__(self, name, user_id, department):
         self.__department = department
         super().__init__(name, user_id)
@@ -82,8 +91,11 @@ class StaffUser(User):
             f"ID: {self.user_id}\n"
             f"Active: {'Yes' if self.is_active else 'No'}"
         )
+    
+    def get_loan_period(self):
+        return "Loan period for Staff users is", 28, "days."
 
-class AdminUser(User):
+class AdminUser(LibraryUser):
     def __init__(self, name, user_id, role):
         self.__role = role
         super().__init__(name, user_id)
@@ -101,6 +113,9 @@ class AdminUser(User):
             f"ID: {self.user_id}\n"
             f"Active: {'Yes' if self.is_active else 'No'}"
         )
+    
+    def get_loan_period(self):
+        return "Loan period for Admin users is", 56, "days."
     
 user1 = User("Alice Zhou", "U001")
 user2 = User("Bob Lee", "U002")

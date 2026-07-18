@@ -35,4 +35,4 @@ for book in books:
     print()
 
 # Testing the take_leave method for StaffUser
-student1.take_leave()  # This will raise an AttributeError since StudentUser does not have a take_leave method
+#student1.take_leave()  # This will raise an AttributeError since StudentUser does not have a take_leave method

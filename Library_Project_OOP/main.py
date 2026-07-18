@@ -3,6 +3,11 @@
 from book import Book, FictionBook, ReferenceBook
 from user import User, StudentUser, StaffUser, AdminUser
 
+# Borrow limits for different user types
+student_borrow_limit = 14
+staff_borrow_limit = 28
+admin_borrow_limit = 56
+
 # Book objects
 #book1 = Book("1984", "George Orwell")
 #book2 = Book("To Kill a Mockingbird", "Harper Lee", False)
@@ -20,8 +25,18 @@ print(student1.display_info())
 print(staff1.display_info())
 print(admin1.display_info())
 #users = [student1, staff1, admin1]
+student = StudentUser("Ava", "S001", 11)
+student_days = student.get_loan_period()
+print(f"A student can borrow items for {student_days} days.")
 
-#print()
+staff = StaffUser("John", "ST001", "Library Staff")
+staff_days = staff.get_loan_period()
+print(f"A staff member can borrow items for {staff_days} days.")
+
+admin = AdminUser("Emma", "A001", "Library Admin")
+admin_days = admin.get_loan_period()
+print(f"An admin can borrow items for {admin_days} days.")
+print()
 #for user in users:
  #   print(user.display_info())
   #  print()

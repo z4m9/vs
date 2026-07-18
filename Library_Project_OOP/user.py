@@ -67,11 +67,11 @@ class StudentUser(LibraryUser):
         return (
             f"Student: {self.name}\n"
             f"ID: {self.user_id}\n"
-            f"Active: {'Yes' if self.is_active else 'No'}"
+            f"Active: {'Yes' if self.is_active else 'No'}\n"
         )
     
     def get_loan_period(self):
-        return "Loan period for Student users is", 14, "days."
+        print("Loan period for Student users is", 14, "days.")
 
 class StaffUser(LibraryUser):
     def __init__(self, name, user_id, department):
@@ -89,11 +89,11 @@ class StaffUser(LibraryUser):
         return (
             f"Staff: {self.name}\n"
             f"ID: {self.user_id}\n"
-            f"Active: {'Yes' if self.is_active else 'No'}"
+            f"Active: {'Yes' if self.is_active else 'No'}\n"
         )
     
     def get_loan_period(self):
-        return "Loan period for Staff users is", 28, "days."
+        print("\nLoan period for Staff users is", 28, "days.")
 
 class AdminUser(LibraryUser):
     def __init__(self, name, user_id, role):
@@ -111,16 +111,16 @@ class AdminUser(LibraryUser):
         return (
             f"Admin: {self.name}\n"
             f"ID: {self.user_id}\n"
-            f"Active: {'Yes' if self.is_active else 'No'}"
+            f"Active: {'Yes' if self.is_active else 'No'}\n"
         )
     
     def get_loan_period(self):
-        return "Loan period for Admin users is", 56, "days."
+        print("\nLoan period for Admin users is", 56, "days.")
     
-user1 = User("Alice Zhou", "U001")
-user2 = User("Bob Lee", "U002")
+#user1 = User("Alice Zhou", "U001")
+#user2 = User("Bob Lee", "U002")
 
-info1 = user1.display_info()
-info2 = user2.display_info()
-print(info1)
-print(info2)
+#info1 = user1.display_info()
+#info2 = user2.display_info()
+#print(info1)
+#print(info2)

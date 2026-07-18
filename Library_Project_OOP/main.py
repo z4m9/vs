@@ -1,25 +1,38 @@
 # OOP Library Main - Samuel Marriott
 
-from book import Book
-from user import User
+from book import Book, FictionBook, ReferenceBook
+from user import User, StudentUser, StaffUser, AdminUser
 
+# Book objects
 book1 = Book("1984", "George Orwell")
 book2 = Book("To Kill a Mockingbird", "Harper Lee", False)
 
+# User Objects
 user1 = User("Alice", "U001")
 user2 = User("Bob", "U002")
 
-# Title getter testing
-print("Original title:", book1.title)
+# Subclass objects (User)
+student1 = StudentUser("Charlie Ward", "S001", "Student")
+staff1 = StaffUser("David Smith", "ST001", "Staff Member")
+admin1 = AdminUser("Eve Johnson", "A001", "Library Admin")
 
-book1.title = "1984"
-print("After valid update:", book1.title)
+users = [student1, staff1, admin1]
 
-book1.title = ""
-print("After invalid update:", book1.title)
+print()
+for user in users:
+    print(user.display_info())
+    print()
 
-print(book1.display_info())
-print(book2.display_info())
-print(user1.display_info())
+# Subclass objects (Book)
+fiction_book1 = FictionBook("The Great Gatsby", "F. Scott Fitzgerald", "Classic")
+reference_book1 = ReferenceBook("Encyclopedia Britannica", "Various Authors", "Reference")
 
-print(f"{user1.name} has borrowed {book1.title}.")
+books = [fiction_book1, reference_book1]
+
+print()
+for book in books:
+    print(book.display_info())
+    print()
+
+# Testing the take_leave method for StaffUser
+student1.take_leave()  # This will raise an AttributeError since StudentUser does not have a take_leave method

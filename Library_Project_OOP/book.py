@@ -47,6 +47,46 @@ class Book:
     def __str__(self):
         return f"{self.__title} by {self.__author}"
 
+class FictionBook(Book):
+    def __init__(self, title, author, genre, available = True):
+        super().__init__(title, author, available)
+        self.__genre = genre
+
+    @property
+    def genre(self):
+        return self.__genre
+    
+    def get_summary(self):
+        return f"{self.title} is a {self.__genre} fiction book by {self.author}."
+    
+    def display_info(self):
+        return (
+            f"Title: {self.title}\n"
+            f"Author: {self.author}\n"
+            f"Genre: {self.__genre}\n"
+            f"Available: {'Yes' if self.available else 'No'}"
+        )
+
+class ReferenceBook(Book):
+    def __init__(self, title, author, library_section, available = True):
+        super().__init__(title, author, available)
+        self.__library_section = library_section
+    
+    @property
+    def library_section(self):
+        return self.__library_section
+    
+    def find_location(self):
+        return f"{self.title} is in the {self.__library_section} section."
+    
+    def display_info(self):
+        return (
+            f"Title: {self.title}\n"
+            f"Author: {self.author}\n"
+            f"Library Section: {self.__library_section}\n"
+            f"Available: {'Yes' if self.available else 'No'}"
+        )
+
 book1 = Book("1984", "George Orwell")
 book2 = Book("To Kill a Mockingbird", "Harper Lee", False)
 
@@ -55,15 +95,3 @@ info1 = book1.display_info()
 info2 = book2.display_info()
 print(info1)
 print(info2)
-print(book1) # str dunder
-
-# Test class variable
-print(f"Number of books: {Book.num_of_books}")
-print(f"Borrow duration limit: {Book.borrow_limit}")
-print(f"Book 1 borrow duration limit: {book1.borrow_limit}")
-
-# Test attribute shadowing
-book1.borrow_limit = 7
-print(f"Borrow duration limit: {Book.borrow_limit}")
-print(f"Book 1 borrow duration limit: {book1.borrow_limit}")
-print(f"Book 2 borrow duration limit: {book2.borrow_limit}")

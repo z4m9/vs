@@ -4,8 +4,8 @@ from book import Book, FictionBook, ReferenceBook
 from user import User, StudentUser, StaffUser, AdminUser
 
 # Book objects
-book1 = Book("1984", "George Orwell")
-book2 = Book("To Kill a Mockingbird", "Harper Lee", False)
+#book1 = Book("1984", "George Orwell")
+#book2 = Book("To Kill a Mockingbird", "Harper Lee", False)
 
 # User Objects
 user1 = User("Alice", "U001")
@@ -24,15 +24,21 @@ for user in users:
     print()
 
 # Subclass objects (Book)
-fiction_book1 = FictionBook("The Great Gatsby", "F. Scott Fitzgerald", "Classic")
-reference_book1 = ReferenceBook("Encyclopedia Britannica", "Various Authors", "Reference")
+fiction1 = FictionBook("The Great Gatsby", "F. Scott Fitzgerald", "Classic")
+reference1 = ReferenceBook("Encyclopedia Britannica", "Various Authors", "Reference")
 
-books = [fiction_book1, reference_book1]
+print(fiction1.display_info())
+print(fiction1.borrow_item())
 
-print()
-for book in books:
-    print(book.display_info())
-    print()
+print(f"\n{reference1.display_info()}")
+print(reference1.borrow_item())
+
+#books = [fiction1, reference1]
+
+#print()
+#for book in books:
+#    print(book.display_info())
+ #   print()
 
 # Testing the take_leave method for StaffUser
 #student1.take_leave()  # This will raise an AttributeError since StudentUser does not have a take_leave method

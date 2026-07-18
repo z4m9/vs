@@ -106,11 +106,11 @@ class ReferenceBook(Book):
     def borrow_item(self):
         return f"'{self.title}' is for library use only."
 
-book1 = Book("1984", "George Orwell")
-book2 = Book("To Kill a Mockingbird", "Harper Lee", False)
+#book1 = Book("1984", "George Orwell")
+#book2 = Book("To Kill a Mockingbird", "Harper Lee", False)
 
 # Book information
-info1 = book1.display_info()
-info2 = book2.display_info()
-print(info1)
-print(info2)
+#info1 = book1.display_info()
+#info2 = book2.display_info()
+#print(info1)
+#print(info2)

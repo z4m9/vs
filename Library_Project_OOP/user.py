@@ -61,7 +61,7 @@ class StudentUser(User):
         return (
             f"Student: {self.name}\n"
             f"ID: {self.user_id}\n"
-            f"Active: {self.is_active}\n"
+            f"Active: {'Yes' if self.is_active else 'No'}"
         )
 
 class StaffUser(User):
@@ -80,7 +80,7 @@ class StaffUser(User):
         return (
             f"Staff: {self.name}\n"
             f"ID: {self.user_id}\n"
-            f"Active: {self.is_active}"
+            f"Active: {'Yes' if self.is_active else 'No'}"
         )
 
 class AdminUser(User):
@@ -99,7 +99,7 @@ class AdminUser(User):
         return (
             f"Admin: {self.name}\n"
             f"ID: {self.user_id}\n"
-            f"Active: {self.is_active}"
+            f"Active: {'Yes' if self.is_active else 'No'}"
         )
     
 user1 = User("Alice Zhou", "U001")

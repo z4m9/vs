@@ -61,7 +61,7 @@ class StudentUser(User):
         return (
             f"Student: {self.name}\n"
             f"ID: {self.user_id}\n"
-            f"Active: {self.is_active}"
+            f"Active: {self.is_active}\n"
         )
 
 class StaffUser(User):

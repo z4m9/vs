@@ -90,6 +90,7 @@ class StaffUser(LibraryUser):
         return (
             f"Staff: {self.name}\n"
             f"ID: {self.user_id}\n"
+            f"Department: {self.__department}\n"
             f"Active: {'Yes' if self.is_active else 'No'}\n"
         )
     

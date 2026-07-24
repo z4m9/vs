@@ -3,39 +3,43 @@
 from book import FictionBook, ReferenceBook
 from user import StudentUser, StaffUser, AdminUser
 
-student_borrow_limit = 14
-staff_borrow_limit = 28
-admin_borrow_limit = 56
+#student_borrow_limit = 14
+#staff_borrow_limit = 28
+#admin_borrow_limit = 56
 
 # User objects
-student_poly = StudentUser("Alice Johnson", "S001", 11)
-staff_poly = StaffUser("Bob Smith", "ST001", "Maths")
-admin_poly = AdminUser("Charlie Brown", "A001", "Librarian")
+student1 = StudentUser("Alice Johnson", "S001", 11)
+staff = StaffUser("Bob Smith", "ST001", "Maths")
+admin = AdminUser("Charlie Brown", "A001", "Librarian")
 
 # Book objects
-fiction_poly = FictionBook("The Great Gatsby", "F. Scott Fitzgerald", "Classic")
-reference_poly = ReferenceBook("Encyclopedia Britannica", "Various Authors", "Reference")
+fiction = FictionBook("The Great Gatsby", "F. Scott Fitzgerald", "Classic")
+reference = ReferenceBook("Encyclopedia Britannica", "Various Authors", "Reference")
 
 # Group objects into lists
-user_poly = [student_poly, staff_poly, admin_poly]
-book_poly = [fiction_poly, reference_poly]
+users = [student1, staff, admin]
+books = [fiction, reference]
 
 # Display user information
-def display_users(user_poly):
+def display_users(users):
     print("User Information:")
     print("-----------------")
-    for user in user_poly:
+    for user in users:
+        print(user.display_info())
         print(f"Loan period: {user.get_loan_period()} days")
         print()
 
 # Display book information
-def display_books(book_poly):
+def display_books(books):
     print("Book Information:")
     print("-----------------")
-    for book in book_poly:
+    for book in books:
         print(book.display_info())
         print(book.borrow_item())
         print()
+
+display_users(users)
+display_books(books)
 
 # Abstraction
 '''Borrow limits for different user types

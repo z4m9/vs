@@ -113,6 +113,7 @@ class AdminUser(LibraryUser):
         return (
             f"Admin: {self.name}\n"
             f"ID: {self.user_id}\n"
+            f"Role: {self.__role}\n"
             f"Active: {'Yes' if self.is_active else 'No'}\n"
         )
     

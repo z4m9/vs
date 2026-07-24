@@ -67,7 +67,7 @@ class StudentUser(LibraryUser):
         return (
             f"Student: {self.name}\n"
             f"ID: {self.user_id}\n"
-            f" Year Level: {self.__year_level}\n"
+            f"Year Level: {self.__year_level}\n"
             f"Active: {'Yes' if self.is_active else 'No'}\n"
         )
     

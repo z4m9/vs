@@ -9,6 +9,7 @@ from user import StudentUser, StaffUser, AdminUser
 
 # User objects
 student1 = StudentUser("Alice Johnson", "S001", 11)
+student2 = StudentUser("David Lee", "S002", 12)
 staff = StaffUser("Bob Smith", "ST001", "Maths")
 admin = AdminUser("Charlie Brown", "A001", "Librarian")
 
@@ -17,7 +18,7 @@ fiction = FictionBook("The Great Gatsby", "F. Scott Fitzgerald", "Classic")
 reference = ReferenceBook("Encyclopedia Britannica", "Various Authors", "Reference")
 
 # Group objects into lists
-users = [student1, staff, admin]
+users = [student1, student2, staff, admin]
 books = [fiction, reference]
 
 # Display user information

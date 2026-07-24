@@ -1,20 +1,47 @@
 # OOP Library Main - Samuel Marriott
 
-from book import Book, FictionBook, ReferenceBook
-from user import User, StudentUser, StaffUser, AdminUser
+from book import FictionBook, ReferenceBook
+from user import StudentUser, StaffUser, AdminUser
 
-# Borrow limits for different user types
 student_borrow_limit = 14
 staff_borrow_limit = 28
 admin_borrow_limit = 56
 
-# Book objects
-#book1 = Book("1984", "George Orwell")
-#book2 = Book("To Kill a Mockingbird", "Harper Lee", False)
+# User objects
+student_poly = StudentUser("Alice Johnson", "S001", 11)
+staff_poly = StaffUser("Bob Smith", "ST001", "Maths")
+admin_poly = AdminUser("Charlie Brown", "A001", "Librarian")
 
-# User Objects
-#user1 = User("Alice", "U001")
-#user2 = User("Bob", "U002")
+# Book objects
+fiction_poly = FictionBook("The Great Gatsby", "F. Scott Fitzgerald", "Classic")
+reference_poly = ReferenceBook("Encyclopedia Britannica", "Various Authors", "Reference")
+
+# Group objects into lists
+user_poly = [student_poly, staff_poly, admin_poly]
+book_poly = [fiction_poly, reference_poly]
+
+# Display user information
+def display_users(user_poly):
+    print("User Information:")
+    print("-----------------")
+    for user in user_poly:
+        print(f"Loan period: {user.get_loan_period()} days")
+        print()
+
+# Display book information
+def display_books(book_poly):
+    print("Book Information:")
+    print("-----------------")
+    for book in book_poly:
+        print(book.display_info())
+        print(book.borrow_item())
+        print()
+
+# Abstraction
+'''Borrow limits for different user types
+student_borrow_limit = 14
+staff_borrow_limit = 28
+admin_borrow_limit = 56
 
 # Subclass objects (User)
 student1 = StudentUser("Charlie Ward", "S001", "Student")
@@ -37,9 +64,6 @@ admin = AdminUser("Emma", "A001", "Library Admin")
 admin_days = admin.get_loan_period()
 print(f"An admin can borrow items for {admin_days} days.")
 print()
-#for user in users:
- #   print(user.display_info())
-  #  print()
 
 # Subclass objects (Book)
 fiction1 = FictionBook("The Great Gatsby", "F. Scott Fitzgerald", "Classic")
@@ -49,8 +73,21 @@ print(fiction1.display_info())
 print(fiction1.borrow_item())
 
 print(f"\n{reference1.display_info()}")
-print(reference1.borrow_item())
+print(reference1.borrow_item())'''
 
+
+# Inheritance
+'''Book objects
+#book1 = Book("1984", "George Orwell")
+#book2 = Book("To Kill a Mockingbird", "Harper Lee", False)
+
+# User Objects
+#user1 = User("Alice", "U001")
+#user2 = User("Bob", "U002")
+
+#for user in users:
+ #   print(user.display_info())
+  #  print()
 
 #books = [fiction1, reference1]
 
@@ -60,4 +97,4 @@ print(reference1.borrow_item())
  #   print()
 
 # Testing the take_leave method for StaffUser
-#student1.take_leave()  # This will raise an AttributeError since StudentUser does not have a take_leave method
+#student1.take_leave()  # This will raise an AttributeError since StudentUser does not have a take_leave method'''

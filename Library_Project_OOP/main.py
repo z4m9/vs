@@ -3,10 +3,6 @@
 from book import FictionBook, ReferenceBook
 from user import StudentUser, StaffUser, AdminUser
 
-#student_borrow_limit = 14
-#staff_borrow_limit = 28
-#admin_borrow_limit = 56
-
 # User objects
 student1 = StudentUser("Alice Johnson", "S001", 11)
 student2 = StudentUser("David Lee", "S002", 12)

@@ -79,7 +79,7 @@ class FictionBook(Book):
     def borrow_item(self):
         if self.available:
             self.available = False
-            return f"You have borrowed '{self.title}'. Please return it within {self.borrow_limit} days."
+            return f"You have borrowed '{self.title}'."
         else:
             return f"'{self.title}' has already been borrowed."
 

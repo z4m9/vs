@@ -38,6 +38,7 @@ def display_books(books):
         print(book.borrow_item())
         print()
 
+# Call functions to display user and book information
 display_users(users)
 display_books(books)
 
